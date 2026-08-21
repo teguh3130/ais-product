@@ -17,7 +17,8 @@
         <a href="#">{{ t.nav.home }}</a>
         <a href="#about">{{ t.nav.about }}</a>
         <a href="#workflow">{{ t.workflow.subtitle }}</a>
-        <a href="#features">{{ t.nav.features }}</a>
+        <a href="#gallery">{{ t.nav.gallery }}</a>
+        <a href="#Fitur">{{ t.nav.features }}</a>
         <a href="#contact">{{ t.nav.contact }}</a>
     </div>
 

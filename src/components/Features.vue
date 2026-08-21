@@ -1,5 +1,8 @@
 <script setup>
 import FeatureCard from './FeatureCard.vue'
+import ews from '../assets/gambar/ews.png'
+import inspection from '../assets/gambar/spesification.png'
+import movement from '../assets/gambar/trackmap.png'
 
     const Features = [
         {

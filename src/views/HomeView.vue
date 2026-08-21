@@ -6,6 +6,7 @@ import Features from '../components/Features.vue';
 import ContactSection from '../components/ContactSection.vue'
 import FooterSection from '../components/FooterSection.vue'
 import WorkflowSection from '../components/WorkflowSection.vue';
+import GallerySection from '../components/GallerySection.vue';
 </script>
 <template>
   <Navbar />
@@ -30,6 +31,8 @@ import WorkflowSection from '../components/WorkflowSection.vue';
   <WorkflowSection />
 
   <Features />
+
+  <GallerySection />
 
   <ContactSection />
 

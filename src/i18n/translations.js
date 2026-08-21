@@ -3,6 +3,7 @@ export const translations = {
     nav: {
       home: "Home",
       about: "Tentang",
+      gallery: "Galeri",
       features: "Fitur",
       contact: "Kontak"
     },
@@ -57,6 +58,7 @@ export const translations = {
     nav: {
       home: "Home",
       about: "About",
+      gallery: "Gallery",
       features: "Features",
       contact: "Contact"
     },

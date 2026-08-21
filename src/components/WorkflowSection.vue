@@ -1,5 +1,5 @@
 <template>
-  <section id="workflow" class="workflow">
+  <section id="workflow" class="workflow" ref="workflowSection" :class="{'active': isVisible}">
 
     <div class="header">
       <span class="subtitle">{{ t.workflow.subtitle }}</span>
@@ -39,11 +39,37 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { inject, computed, ref, onMounted } from 'vue'
 
 const t = inject('t')
 
 const steps = computed(() => t.value.workflow.steps)
+
+const workflowSection = ref(null)
+const isVisible = ref(false)
+
+onMounted(() => {
+  if (!workflowSection.value) return
+
+  const observer = new IntersectionObserver(
+
+    ([entry]) => {
+
+      if(entry.isIntersecting){
+        isVisible.value = true
+      }
+
+    },
+
+    {
+      threshold:0.3
+    }
+
+  )
+
+  observer.observe(workflowSection.value)
+
+})
 </script>
 
 <style scoped>
@@ -90,24 +116,41 @@ h2{
   position:relative;
 }
 
+.step::after{
+  content:"";
+  position:absolute;
+  top:45px;
+  left:60%;
+  width:90%;
+  height:4px;
+  background:#4AA3FF;
+  border-radius:999px;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 2s ease;
+  z-index:0;
+}
+
+.step:last-child::after{
+  display:none;
+}
+
 .circle{
   width:90px;
   height:90px;
-
+  position:relative;
+  z-index:2;
   margin:auto;
-
   border-radius:50%;
-
   background:#0055aa;
   color:white;
-
   display:flex;
   justify-content:center;
   align-items:center;
-
   font-size:40px;
-
   box-shadow:0 15px 30px rgba(0,85,170,.25);
+  opacity:0;
+  transform:translateY(25px) scale(.85);
 }
 
 .number{
@@ -127,6 +170,30 @@ h2{
   line-height:1.7;
 }
 
+.workflow.active .step::after{
+  transform:scaleX(1);
+}
+
+.workflow.active .step:nth-child(1) .circle{
+animation:popUp .5s ease forwards;
+animation-delay:.2s;
+}
+
+.workflow.active .step:nth-child(2) .circle{
+animation:popUp .5s ease forwards;
+animation-delay:.5s;
+}
+
+.workflow.active .step:nth-child(3) .circle{
+animation:popUp .5s ease forwards;
+animation-delay:.8s;
+}
+
+.workflow.active .step:nth-child(4) .circle{
+animation:popUp .5s ease forwards;
+animation-delay:1.1s;
+}
+
 .img-workflow{
   text-align:center;
   padding: 20px;
@@ -139,6 +206,20 @@ h2{
 
 .timeline{
 grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@keyframes popUp{
+
+from{
+opacity:0;
+transform:translateY(25px) scale(.85);
+}
+
+to{
+opacity:1;
+transform:translateY(0) scale(1);
 }
 
 }
