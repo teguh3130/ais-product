@@ -1,16 +1,19 @@
+<script setup>
+  import { inject } from 'vue'
+
+  const t = inject('t')
+  const language = inject('language')
+  const toggleLanguage = inject('toggleLanguage')
+</script>
 <template>
   <section class="about" id="about">
     <div class="container">
 
       <div class="left">
-        <h2>Tentang AIS ITS</h2>
-
+        <h2>{{t.about.subtitle}}</h2>
+          
         <p>
-          AISITS adalah sistem identifikasi otomatis dan perangkat keselamatan maritim yang dikembangkan oleh ITS untuk mencegah kecelakaan di laut.
-        </p>
-
-        <p>
-          Fungsi Utama sistem ini adalah Menerima, menyimpan, dan memproses data AIS dari kapal dan platform lepas pantai (offshore platform) untuk mengamankan navigasi, melindungi pipa bawah laut (subsea pipeline), serta platform lepas pantai.
+          {{t.about.description}}
         </p>
       </div>
 

@@ -2,13 +2,13 @@
 
     <div class="card">
 
-    <div class="icon">
-            {{ icon }}
+        <div class="icon">
+            <img :src="icon" alt={{ title }} width="250"/>
         </div>
 
-        <h3>{{ title }}</h3>
+        <h3>{{ t.fitur.title[title] }}</h3>
 
-        <p>{{ description }}</p>
+        <p>{{ t.fitur.description[title] }}</p>
 
     </div>
 
@@ -18,11 +18,17 @@
 
 <script setup>
 
-defineProps({
-    icon: String,
-    title: String,
-    description: String
-})
+  import { inject } from 'vue'
+
+  const t = inject('t')
+  const language = inject('language')
+  const toggleLanguage = inject('toggleLanguage')
+
+    defineProps({
+        icon: String,
+        title: String,
+        description: String
+    })
 
 </script>
 

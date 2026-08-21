@@ -1,24 +1,21 @@
 <script setup>
 import FeatureCard from './FeatureCard.vue'
-import ews from '../assets/gambar/ews.png'
-import inspection from '../assets/gambar/spesification.png'
-import movement from '../assets/gambar/trackmap.png'
+import EWSIcon from '../assets/gambar/ews.png'
+import InspectionIcon from '../assets/gambar/spesification.png'
+import MovementIcon from '../assets/gambar/trackmap.png'
 
     const Features = [
         {
-            icon: '🚨',
-            title: 'Early Warning System(EWS)',
-            description: 'Sistem peringatan dini untuk memberi tahu kapal jika mendekati area berbahaya, pipa bawah laut, platform lepas pantai, atau saat penurunan jangkar.'
+            icon: EWSIcon,
+            title: '1',
         },
         {
-            icon: '📊',
-            title: 'Ship Inspection System (Inspeksi Kapal)',
-            description: 'Membantu pihak Syahbandar / Otoritas Pelabuhan (Port Authority) dalam menilai tingkat risiko kapal sebelum atau sesudah memasuki pelabuhan.'
+            icon: InspectionIcon,
+            title: '2',
         },
         {
-            icon: '💻',
-            title: 'Ship Movement Recording (Perekaman Pergerakan Kapal)',
-            description: 'Mengumpulkan data AIS dari berbagai sumber (AISHUB, IPSWITCH, LAPAN) untuk menyimpan riwayat pergerakan kapal (historical data).'
+            icon: MovementIcon,
+            title: '3',
         }
     ]
 </script>
