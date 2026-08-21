@@ -1,227 +1,316 @@
-
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
+import demoVideo from '../assets/video/test.mp4'
 import ews from '../assets/gambar/ews.png'
 import inspection from '../assets/gambar/spesification.png'
 import movement from '../assets/gambar/trackmap.png'
 
-const gallery = [
-
+const slides = [
   {
-    title: "Early Warning System",
-    short: "Peringatan area berbahaya.",
-    description:
-      "Sistem memberikan peringatan dini ketika kapal mendekati area berisiko.",
-    image: ews
+    type: 'video',
+    title: 'AIS ITS Demo',
+    description: 'Demo monitoring kapal secara real-time.',
+    file: demoVideo
   },
-
   {
-    title: "Ship Inspection System",
-    short: "Analisis inspeksi kapal.",
-    description:
-      "Membantu otoritas pelabuhan melakukan evaluasi risiko kapal.",
-    image: inspection
+    type: 'image',
+    title: 'Early Warning System',
+    description: 'Peringatan dini area berbahaya.',
+    file: ews
   },
-
   {
-    title: "Ship Movement Recording",
-    short: "Riwayat pergerakan kapal.",
-    description:
-      "Menyimpan data historis AIS untuk analisis perjalanan kapal.",
-    image: movement
+    type: 'image',
+    title: 'Ship Inspection',
+    description: 'Analisis inspeksi kapal.',
+    file: inspection
+  },
+  {
+    type: 'image',
+    title: 'Ship Movement Recording',
+    description: 'Riwayat perjalanan kapal.',
+    file: movement
   }
-
 ]
 
-const selectedImage = ref(null)
+const current = ref(0)
 
-const openImage = (item) => {
-  selectedImage.value = item
+const nextSlide = () => {
+  current.value = (current.value + 1) % slides.length
 }
 
-const closeImage = () => {
-  selectedImage.value = null
+const prevSlide = () => {
+  current.value = (current.value - 1 + slides.length) % slides.length
 }
+
+let interval
+
+onMounted(() => {
+  interval = setInterval(nextSlide, 5000)
+})
+
+onBeforeUnmount(() => {
+  clearInterval(interval)
+})
+
 </script>
 <template>
-  <section id="gallery" class="gallery">
 
-    <div class="header">
-      <span class="subtitle">Galeri Produk</span>
-      <h2>Visualisasi AIS ITS</h2>
-      <p>
-        Beberapa tampilan produk dan sistem yang dikembangkan
-        untuk monitoring kapal berbasis AIS.
-      </p>
-    </div>
+<section id="gallery" class="gallery">
 
-    <div class="gallery-grid">
+<div class="header">
+<span class="subtitle">Galeri Produk</span>
 
-      <div
-        class="gallery-card"
-        v-for="item in gallery"
-        :key="item.title"
-        @click="openImage(item)"
-      >
+# Visualisasi AIS ITS
 
-        <img
-          :src="item.image"
-          :alt="item.title"
-        >
+Lihat demonstrasi sistem AIS ITS beserta fitur utama yang dikembangkan.
 
-        <div class="overlay">
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.short }}</p>
-        </div>
+</div>
 
-      </div>
+<div class="carousel-wrapper">
 
-    </div>
+<button class="nav prev" @click="prevSlide">
+❮
 
-    <div
-      v-if="selectedImage"
-      class="modal"
-      @click="closeImage"
-    >
+</button>
 
-      <div
-        class="modal-content"
-        @click.stop
-      >
+<div class="carousel">
 
-        <button
-          class="close-btn"
-          @click="closeImage"
-        >
-          ✕
-        </button>
+<div
+v-for="(slide,index) in slides"
+:key="index"
+class="card"
+:class="{
+active:index===current,
+left:index===((current-1+slides.length)%slides.length),
+right:index===((current+1)%slides.length)
+}"
+>
 
-        <img
-          :src="selectedImage.image"
-          :alt="selectedImage.title"
-        >
+<video
+v-if="slide.type==='video'"
+:src="slide.file"
+autoplay
+muted
+loop
+playsinline
+></video>
 
-        <h3>{{ selectedImage.title }}</h3>
+<img
+v-else
+:src="slide.file"
+:alt="slide.title"
+>
 
-        <p>{{ selectedImage.description }}</p>
+<div class="overlay">
 
-      </div>
+<badge>{{ slide.type==='video' ? 'Demo':'Product' }}</badge>
 
-    </div>
+## {{ slide.title }}
 
-  </section>
+{{ slide.description }}
+
+</div>
+
+</div>
+
+</div>
+
+<button class="nav next" @click="nextSlide">
+❯
+
+</button>
+
+</div>
+
+<div class="dots">
+
+<span
+v-for="(_,index) in slides"
+:key="index"
+class="dot"
+:class="{active:index===current}"
+@click="current=index"
+></span>
+
+</div>
+
+</section>
+
 </template>
-
 <style scoped>
 
 .gallery{
-  padding:100px 40px;
-  background:#f8fafc;
+padding:100px 30px;
+background:#f8fafc;
+overflow:hidden;
 }
 
 .header{
-  max-width:800px;
-  margin:auto;
-  text-align:center;
-  margin-bottom:60px;
+text-align:center;
+max-width:700px;
+margin:auto auto 60px;
 }
 
 .subtitle{
-  color:#0066cc;
-  font-weight:bold;
+color:#007bff;
+font-weight:bold;
 }
 
 .header h2{
-  font-size:42px;
-  color:#003366;
+font-size:42px;
+color:#003366;
+margin:15px 0;
 }
 
-.gallery-grid{
-  max-width:1200px;
-  margin:auto;
-
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
+.carousel-wrapper{
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.gallery-card{
-  position:relative;
-  overflow:hidden;
-  border-radius:18px;
-  cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
+.carousel{
+position:relative;
+width:100%;
+max-width:1200px;
+height:460px;
 }
 
-.gallery-card img{
-  width:100%;
-  height:240px;
-  object-fit:cover;
-  transition:.5s;
+.card{
+position:absolute;
+top:0;
+left:50%;
+
+width:68%;
+height:100%;
+
+border-radius:22px;
+overflow:hidden;
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+transition:.6s ease;
+
+opacity:0;
+pointer-events:none;
+transform:translateX(-50%) scale(.85);
 }
 
-.gallery-card:hover img{
-  transform:scale(1.08);
+.card img,
+.card video{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.card.active{
+opacity:1;
+transform:translateX(-50%) scale(1);
+z-index:3;
+pointer-events:auto;
+}
+
+.card.left{
+opacity:.75;
+transform:translateX(-92%) scale(.82);
+z-index:2;
+}
+
+.card.right{
+opacity:.75;
+transform:translateX(-8%) scale(.82);
+z-index:2;
 }
 
 .overlay{
-  position:absolute;
-  inset:0;
+position:absolute;
+left:0;
+right:0;
+bottom:0;
 
-  background:linear-gradient(
-    transparent,
-    rgba(0,40,80,.85)
-  );
+padding:28px;
 
-  display:flex;
-  flex-direction:column;
-  justify-content:end;
+color:white;
 
-  padding:24px;
-  color:white;
+background:linear-gradient(
+transparent,
+rgba(0,20,60,.9)
+);
 }
 
-.modal{
-  position:fixed;
-  inset:0;
+.nav{
+position:absolute;
 
-  background:rgba(0,0,0,.7);
+width:58px;
+height:58px;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+border:none;
+border-radius:50%;
 
-  z-index:1000;
+background:white;
+
+font-size:28px;
+
+cursor:pointer;
+
+z-index:5;
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
-.modal-content{
-  background:white;
-  width:min(90%,800px);
-  border-radius:18px;
-  padding:24px;
-  position:relative;
+.prev{
+left:10px;
 }
 
-.modal-content img{
-  width:100%;
-  border-radius:12px;
+.next{
+right:10px;
 }
 
-.close-btn{
-  position:absolute;
-  top:16px;
-  right:16px;
+.nav:hover{
+transform:scale(1.05);
+}
 
-  border:none;
-  background:#003366;
-  color:white;
+.dots{
+display:flex;
+justify-content:center;
+gap:12px;
+margin-top:35px;
+}
 
-  width:36px;
-  height:36px;
-  border-radius:50%;
+.dot{
+width:12px;
+height:12px;
 
-  cursor:pointer;
+border-radius:50%;
+
+background:#cbd5e1;
+cursor:pointer;
+
+transition:.3s;
+}
+
+.dot.active{
+background:#0055aa;
+transform:scale(1.4);
+}
+
+@media(max-width:768px){
+
+.carousel{
+height:320px;
+}
+
+.card{
+width:88%;
+}
+
+.card.left,
+.card.right{
+opacity:0;
+transform:translateX(-50%) scale(.9);
+}
+
 }
 
 </style>
