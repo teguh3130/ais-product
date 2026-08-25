@@ -19,8 +19,7 @@ provide('t', t)
   <RouterView />
 </template>
 <style>
-
-body{
+body {
   font-family: Arial, Helvetica, sans-serif;
 }
 </style>
