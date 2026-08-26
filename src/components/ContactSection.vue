@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
+
+const t = inject('t')
 
 const form = ref({
   name: '',
@@ -23,13 +25,12 @@ const submitForm = () => {
 
       <!-- Informasi -->
       <div class="contact-info">
-        <span class="subtitle">Hubungi Kami</span>
+        <span class="subtitle">{{ t.contact.header[1] }}</span>
 
-        <h2>Kontak AIS ITS</h2>
+        <h2>{{ t.contact.header[2] }}</h2>
 
         <p>
-          Hubungi tim AIS ITS untuk informasi produk, kerja sama penelitian,
-          maupun konsultasi mengenai teknologi pemantauan kapal.
+          {{ t.contact.header[3] }}
         </p>
 
         <div class="info-item">
@@ -50,14 +51,14 @@ const submitForm = () => {
 
         <form @submit.prevent="submitForm">
 
-          <input v-model="form.name" type="text" placeholder="Nama Lengkap" required>
+          <input v-model="form.name" type="text" :placeholder="t.contact.form.name" required>
 
-          <input v-model="form.email" type="email" placeholder="Email" required>
+          <input v-model="form.email" type="email" :placeholder="t.contact.form.email" required>
 
-          <textarea v-model="form.message" placeholder="Tulis pesan..." rows="5" required></textarea>
+          <textarea v-model="form.message" :placeholder="t.contact.form.message" rows="5" required></textarea>
 
           <button type="submit">
-            Kirim Pesan
+            {{ t.contact.form.submit }}
           </button>
 
         </form>

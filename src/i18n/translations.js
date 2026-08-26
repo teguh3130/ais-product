@@ -1,11 +1,20 @@
 export const translations = {
     id: {
         nav: {
-            home: "Home",
-            about: "Tentang",
-            gallery: "Galeri",
-            features: "Fitur",
-            contact: "Kontak"
+            1: "Home",
+            2: "Tentang",
+            3: "Alur sistem",
+            4: "Galeri",
+            5: "Fitur",
+            6: "Kontak",
+            test:{
+                1: "Home",
+                2: "Tentang",
+                3: "Alur sistem",
+                4: "Galeri",
+                5: "Fitur",
+                6: "Kontak",
+            }
         },
 
         hero: {
@@ -22,6 +31,7 @@ export const translations = {
         },
 
         fitur: {
+            header: "Fitur Utama",
             title: {
                 1: "Sistem Peringatan Dini (Early Warning System)",
                 2: "Sistem Inspeksi Kapal (Ship Inspection System)",
@@ -71,15 +81,51 @@ export const translations = {
                 }
             ]
         },
+        gallery: {
+            header: {
+                1: "Galeri",
+                2: "Visualisasi AIS ITS",
+                3: "Lihat demonstrasi sistem AIS ITS beserta fitur utama yang dikembangkan.",
+            },
+            judul: {
+                1: "video test",
+                2: "img test",
+                3: "img test",
+                4: "img test"
+            },
+            deskripsi: {
+                1: "Demonstrasi sistem AIS ITS",
+                2: "Tampilan sistem AIS ITS",
+                3: "Tampilan sistem AIS ITS",
+                4: "Tampilan sistem AIS ITS"
+            }
+        },
+        contact: {
+            header:{
+                1: "Hubungi Kami",
+                2: "Kontak AIS ITS",
+                3: "Hubungi tim AIS ITS untuk informasi produk, kerja sama penelitian, maupun konsultasi mengenai teknologi pemantauan kapal."
+            },
+            form: {
+                name: "Nama",
+                email: "Email",
+                message: "Tulis Pesan...",
+                submit: "Kirim Pesan"
+            }
+        },
+        footer: {
+            deskripsi: "Solusi teknologi maritim berbasis Automatic Identification System untuk monitoring kapal, analisis data, dan penelitian maritim",
+        }
     },
 
     en: {
         nav: {
-            home: "Home",
-            about: "About",
-            gallery: "Gallery",
-            features: "Features",
-            contact: "Contact"
+            1: "Home",
+            2: "About",
+            3:"Workflow",
+            4: "Gallery",
+            5: "Features",
+            6: "Contact"
         },
 
         hero: {
@@ -96,6 +142,7 @@ export const translations = {
         },
 
         fitur: {
+            header: "Main Features",
             title: {
                 1: "Early Warning System (EWS)",
                 2: "Ship Inspection System",
@@ -146,5 +193,41 @@ export const translations = {
             ]
         },
 
+        gallery: {
+            header: {
+                1: "Gallery",
+                2: "AIS ITS Visualization",
+                3: "View the AIS ITS system demonstration along with its main features."
+            },
+            judul: {
+                1: "video test",
+                2: "img test",
+                3: "img test",
+                4: "img test"
+            },
+            deskripsi: {
+                1: "Demo system AIS ITS",
+                2: "AIS ITS Interface",
+                3: "AIS ITS Interface",
+                4: "AIS ITS Interface"
+            }
+        },
+
+        contact: {
+            header:{
+                1: "Contact Us",
+                2: "Contact AIS ITS",
+                3: "Reach out to the AIS ITS team for product information, research collaboration, or consultation regarding vessel monitoring technology."
+            },
+            form: {
+                name: "Name",
+                email: "Email",
+                message: "Write a Message...",
+                submit: "Send Message"
+            }
+        },
+        footer: {
+            deskripsi: "Maritime technology solution based on the Automatic Identification System for vessel monitoring, data analysis, and maritime research."
+        }
     }
 }

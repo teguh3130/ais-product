@@ -8,8 +8,7 @@
         <!-- <h2>AIS ITS</h2> -->
 
         <p>
-          Solusi teknologi maritim berbasis Automatic Identification System
-          untuk monitoring kapal, analisis data, dan penelitian maritim.
+          {{t.footer.deskripsi}}
         </p>
       </div>
 
@@ -17,18 +16,26 @@
       <div class="footer-column">
         <h3>Navigasi</h3>
 
-        <a v-for="link in navLinks" :key="link.name" :href="link.href">
+        <!-- <a v-for="link in navLinks" :key="link.name" :href="link.href">
           {{ link.name }}
-        </a>
+        </a> -->
+        <a href="#">{{ t.nav[1] }}</a>
+        <a href="#about">{{ t.nav[2]}}</a>
+        <a href="#workflow">{{ t.nav[3] }}</a>
+        <a href="#gallery">{{ t.nav[4] }}</a>
+        <a href="#Fitur">{{ t.nav[5] }}</a>
+        <a href="#contact">{{ t.nav[6] }}</a>
+
       </div>
 
       <!-- Kolom 3 -->
       <div class="footer-column">
         <h3>Fitur Utama</h3>
 
-        <a v-for="product in products" :key="product" href="#features">
+        <a v-for="product in products" :key="product" href="#Fitur">
           {{ product }}
         </a>
+
       </div>
 
       <!-- Kolom 4 -->
@@ -50,12 +57,16 @@
 
 <script setup>
 
-const navLinks = [
-  { name: "Home", href: "#" },
-  { name: "Tentang", href: "#about" },
-  { name: "Fitur", href: "#Fitur" },
-  { name: "Kontak", href: "#contact" }
-]
+import { inject } from 'vue'
+
+const t = inject('t')
+
+// const navLinks = [
+//   { name: "Home", href: "#" },
+//   { name: "Tentang", href: "#about" },
+//   { name: "Fitur", href: "#Fitur" },
+//   { name: "Kontak", href: "#contact" }
+// ]
 
 const products = [
   "Early Warning System",

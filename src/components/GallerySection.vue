@@ -1,34 +1,28 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { inject, ref, onMounted, onBeforeUnmount } from 'vue'
 
 import demoVideo from '../assets/video/test.mp4'
 import ews from '../assets/gambar/ews.png'
 import inspection from '../assets/gambar/spesification.png'
 import movement from '../assets/gambar/trackmap.png'
 
+const t = inject('t')
+
 const slides = [
   {
     type: 'video',
-    title: 'AIS ITS Demo',
-    description: 'Demo monitoring kapal secara real-time.',
     file: demoVideo
   },
   {
     type: 'image',
-    title: 'Early Warning System',
-    description: 'Peringatan dini area berbahaya.',
     file: ews
   },
   {
     type: 'image',
-    title: 'Ship Inspection',
-    description: 'Analisis inspeksi kapal.',
     file: inspection
   },
   {
     type: 'image',
-    title: 'Ship Movement Recording',
-    description: 'Riwayat perjalanan kapal.',
     file: movement
   }
 ]
@@ -59,11 +53,11 @@ onBeforeUnmount(() => {
   <section id="gallery" class="gallery">
 
     <div class="header">
-      <span class="subtitle">Galeri Produk</span>
+      <h2 class="subtitle">{{ t.gallery.header[1] }}</h2>
 
-      # Visualisasi AIS ITS
+      <h3>{{t.gallery.header[2]}}</h3>
 
-      Lihat demonstrasi sistem AIS ITS beserta fitur utama yang dikembangkan.
+      {{t.gallery.header[3]}}
 
     </div>
 
@@ -84,15 +78,14 @@ onBeforeUnmount(() => {
 
           <video v-if="slide.type === 'video'" :src="slide.file" autoplay muted loop playsinline></video>
 
-          <img v-else :src="slide.file" :alt="slide.title">
+          <img v-else :src="slide.file" :alt="t.gallery.judul[index + 1]"/>
 
           <div class="overlay">
 
-            <badge>{{ slide.type === 'video' ? 'Demo' : 'Product' }}</badge>
+            <!-- <badge>{{ slide.type === 'video' ? 'Demo' : 'Product' }}</badge> -->
 
-            ## {{ slide.title }}
-
-            {{ slide.description }}
+            {{ t.gallery.judul[index + 1] }} #
+            {{ t.gallery.deskripsi[index + 1] }}
 
           </div>
 
@@ -137,6 +130,10 @@ onBeforeUnmount(() => {
 
 .header h2 {
   font-size: 42px;
+  color: #003366;
+  margin: 15px 0;
+}
+.header h3 {
   color: #003366;
   margin: 15px 0;
 }

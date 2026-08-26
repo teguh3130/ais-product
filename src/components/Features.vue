@@ -3,6 +3,9 @@ import FeatureCard from './FeatureCard.vue'
 import EWSIcon from '../assets/gambar/ews.png'
 import InspectionIcon from '../assets/gambar/spesification.png'
 import MovementIcon from '../assets/gambar/trackmap.png'
+import { inject } from 'vue'
+
+const t = inject('t')
 
 const Features = [
     {
@@ -21,7 +24,7 @@ const Features = [
 </script>
 <template>
     <section id="Fitur" class="fitur">
-        <h2 class="fitur-title">Fitur Utama AIS ITS</h2>
+        <h2 class="fitur-title">{{ t.fitur.header }}</h2>
         <div class="container">
             <FeatureCard v-for="features in Features" :key="features.title" :icon="features.icon"
                 :title="features.title" :description="features.description" />

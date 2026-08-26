@@ -14,12 +14,12 @@ const toggleLanguage = inject('toggleLanguage')
     </div>
 
     <div class="menu">
-      <a href="#">{{ t.nav.home }}</a>
-      <a href="#about">{{ t.nav.about }}</a>
-      <a href="#workflow">{{ t.workflow.subtitle }}</a>
-      <a href="#gallery">{{ t.nav.gallery }}</a>
-      <a href="#Fitur">{{ t.nav.features }}</a>
-      <a href="#contact">{{ t.nav.contact }}</a>
+      <a href="#">{{ t.nav[1] }}</a>
+      <a href="#about">{{ t.nav[2]}}</a>
+      <a href="#workflow">{{ t.nav[3] }}</a>
+      <a href="#Fitur">{{ t.nav[5] }}</a>
+      <a href="#gallery">{{ t.nav[4] }}</a>
+      <a href="#contact">{{ t.nav[6] }}</a>
     </div>
 
     <div class="lang-switch">
