@@ -29,7 +29,7 @@
 
     </div>
 
-    <img src="../assets/gambar/kapal-bg.webp" alt="Workflow" width="100%"/>
+    <img src="../assets/gambar/kapal-bg.webp" alt="Workflow"/>
 
   </section>
 </template>
@@ -190,7 +190,7 @@ h2 {
 }
 
 img {
-  width: auto;
+  width: 100%;
   height: auto;
   margin: 20px;
   object-fit: cover;
