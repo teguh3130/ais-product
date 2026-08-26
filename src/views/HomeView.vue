@@ -11,19 +11,6 @@ import GallerySection from '../components/GallerySection.vue';
 <template>
   <!-- <Navbar /> -->
 
-  <!-- <section class="hero">
-    <div class="content">
-      <h1>Automatic Identification System ITS</h1>
-
-      <p>
-        Solusi teknologi maritim untuk pemantauan kapal secara real-time,
-        analisis data AIS, dan pengembangan sistem monitoring berbasis ITS.
-      </p>
-
-      <button class="btn-learn">Pelajari Produk</button>
-    </div>
-  </section> -->
-
   <HeroSection />
 
   <AboutSection />
