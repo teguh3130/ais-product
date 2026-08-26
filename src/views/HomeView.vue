@@ -9,7 +9,7 @@ import WorkflowSection from '../components/WorkflowSection.vue';
 import GallerySection from '../components/GallerySection.vue';
 </script>
 <template>
-  <Navbar />
+  <!-- <Navbar /> -->
 
   <!-- <section class="hero">
     <div class="content">
@@ -36,6 +36,6 @@ import GallerySection from '../components/GallerySection.vue';
 
   <ContactSection />
 
-  <FooterSection />
+  <!-- <FooterSection /> -->
 
 </template>

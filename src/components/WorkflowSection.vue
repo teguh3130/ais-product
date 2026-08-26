@@ -2,11 +2,11 @@
   <section id="workflow" class="workflow" ref="workflowSection" :class="{ 'active': isVisible }">
 
     <div class="header">
-      <span class="subtitle">{{ t.workflow.subtitle }}</span>
+      <span class="subtitle" data-aos="fade-down" data-aos-delay="700">{{ t.workflow.subtitle }}</span>
 
-      <h2>{{ t.workflow.title }}</h2>
+      <h2 data-aos="zoom-in" data-aos-delay="200">{{ t.workflow.title }}</h2>
 
-      <p>{{ t.workflow.description }}</p>
+      <p data-aos="zoom-in" data-aos-delay="300">{{ t.workflow.description }}</p>
     </div>
 
     <div class="timeline">
@@ -21,9 +21,9 @@
           {{ step.number }}
         </span>
 
-        <h3>{{ step.title }}</h3>
+        <h3 data-aos="fade-right" data-aos-delay="700">{{ step.title }}</h3>
 
-        <p>{{ step.description }}</p>
+        <p data-aos="fade-right" data-aos-delay="700">{{ step.description }}</p>
 
       </div>
 

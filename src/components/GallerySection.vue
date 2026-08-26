@@ -68,7 +68,7 @@ onBeforeUnmount(() => {
 
       </button>
 
-      <div class="carousel">
+      <div class="carousel" data-aos="zoom-in" data-aos-delay="500" data-aos-duration="500">
 
         <div v-for="(slide, index) in slides" :key="index" class="card" :class="{
           active: index === current,

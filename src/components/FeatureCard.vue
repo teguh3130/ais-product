@@ -1,6 +1,6 @@
 <template>
 
-    <div class="card">
+    <div class="card" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="500">
 
         <div class="icon">
             <img :src="icon" alt={{ title }} width="250" />

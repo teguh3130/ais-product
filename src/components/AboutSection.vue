@@ -10,14 +10,14 @@ const toggleLanguage = inject('toggleLanguage')
     <div class="container">
 
       <div class="left">
-        <h2>{{ t.about.subtitle }}</h2>
+        <h2 data-aos="zoom-in" data-aos-delay="100">{{ t.about.subtitle }}</h2>
 
-        <p>
+        <p data-aos="fade-right" data-aos-delay="400">
           {{ t.about.description }}
         </p>
       </div>
 
-      <div class="right">
+      <div class="right" data-aos="fade-left" data-aos-delay="400">
         <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=800" alt="Kapal AIS ITS">
       </div>
 
