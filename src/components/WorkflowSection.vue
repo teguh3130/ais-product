@@ -190,7 +190,7 @@ h2 {
 }
 
 img {
-  width: 100%;
+  width: 97%;
   height: auto;
   margin: 20px;
   object-fit: cover;
