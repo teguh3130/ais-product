@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
 
   <section id="gallery" class="gallery">
 
-    <div class="header">
+    <div class="header" data-aos="fade-down" data-aos-delay="300" data-aos-duration="1000">
       <h2 class="subtitle">{{ t.gallery.header[1] }}</h2>
 
       <h3>{{t.gallery.header[2]}}</h3>
@@ -68,7 +68,7 @@ onBeforeUnmount(() => {
 
       </button>
 
-      <div class="carousel" data-aos="zoom-in" data-aos-delay="500" data-aos-duration="500">
+      <div class="carousel" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="500">
 
         <div v-for="(slide, index) in slides" :key="index" class="card" :class="{
           active: index === current,

@@ -29,7 +29,7 @@
 
     </div>
 
-    <img src="../assets/gambar/kapal-bg.webp" alt="Workflow"/>
+    <img src="../assets/gambar/kapal-bg.webp" alt="Workflow" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1000"/>
 
   </section>
 </template>

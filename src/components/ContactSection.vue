@@ -25,29 +25,29 @@ const submitForm = () => {
 
       <!-- Informasi -->
       <div class="contact-info">
-        <span class="subtitle">{{ t.contact.header[1] }}</span>
+        <span class="subtitle" data-aos="zoom-in" data-aos-delay="300">{{ t.contact.header[1] }}</span>
 
-        <h2>{{ t.contact.header[2] }}</h2>
+        <h2 data-aos="fade-right" data-aos-delay="300" data-aos-duration="1000">{{ t.contact.header[2] }}</h2>
 
-        <p>
+        <p data-aos="fade-right" data-aos-delay="300" data-aos-duration="1000">
           {{ t.contact.header[3] }}
         </p>
 
-        <div class="info-item">
+        <div class="info-item" data-aos="fade-right" data-aos-delay="300" data-aos-duration="1000">
           📍 Kampus ITS, Surabaya
         </div>
 
-        <div class="info-item">
+        <div class="info-item" data-aos="fade-right" data-aos-delay="300" data-aos-duration="1000">
           📧 aisits@its.ac.id
         </div>
 
-        <div class="info-item">
+        <div class="info-item" data-aos="fade-right" data-aos-delay="300" data-aos-duration="1000">
           📞 +62 31 5994251
         </div>
       </div>
 
       <!-- Form -->
-      <div class="contact-form">
+      <div class="contact-form" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000">
 
         <form @submit.prevent="submitForm">
 
