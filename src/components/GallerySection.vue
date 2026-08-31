@@ -29,6 +29,16 @@ const slides = [
 
 const current = ref(0)
 
+const selectedSlide = ref(null)
+
+const openModal = (slide) => {
+  selectedSlide.value = slide
+}
+
+const closeModal = () => {
+  selectedSlide.value = null
+}
+
 const nextSlide = () => {
   current.value = (current.value + 1) % slides.length
 }
@@ -55,9 +65,9 @@ onBeforeUnmount(() => {
     <div class="header" data-aos="fade-down" data-aos-delay="300" data-aos-duration="1000">
       <h2 class="subtitle">{{ t.gallery.header[1] }}</h2>
 
-      <h3>{{t.gallery.header[2]}}</h3>
+      <h3>{{ t.gallery.header[2] }}</h3>
 
-      {{t.gallery.header[3]}}
+      {{ t.gallery.header[3] }}
 
     </div>
 
@@ -70,15 +80,16 @@ onBeforeUnmount(() => {
 
       <div class="carousel" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="500">
 
-        <div v-for="(slide, index) in slides" :key="index" class="card" :class="{
-          active: index === current,
-          left: index === ((current - 1 + slides.length) % slides.length),
-          right: index === ((current + 1) % slides.length)
-        }">
+        <div v-for="(slide, index) in slides" :key="index" class="card" @click="index === current && openModal(slide)"
+          :class="{
+            active: index === current,
+            left: index === ((current - 1 + slides.length) % slides.length),
+            right: index === ((current + 1) % slides.length)
+          }">
 
           <video v-if="slide.type === 'video'" :src="slide.file" autoplay muted loop playsinline></video>
 
-          <img v-else :src="slide.file" :alt="t.gallery.judul[index + 1]"/>
+          <img v-else :src="slide.file" :alt="t.gallery.judul[index + 1]" />
 
           <div class="overlay">
 
@@ -107,6 +118,31 @@ onBeforeUnmount(() => {
 
     </div>
 
+    <Transition name="fade">
+
+      <div v-if="selectedSlide" class="lightbox" @click="closeModal">
+
+        <div class="lightbox-content" @click.stop>
+
+          <button class="close-btn" @click="closeModal">
+            ✕
+          </button>
+
+          <video v-if="selectedSlide.type === 'video'" :src="selectedSlide.file" controls autoplay muted></video>
+
+          <img v-else :src="selectedSlide.file" :alt="selectedSlide.title">
+
+          <div class="lightbox-info">
+            <h3>{{ selectedSlide.title }}</h3>
+            <p>{{ selectedSlide.description }}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </Transition>
+
   </section>
 
 </template>
@@ -133,6 +169,7 @@ onBeforeUnmount(() => {
   color: #003366;
   margin: 15px 0;
 }
+
 .header h3 {
   color: #003366;
   margin: 15px 0;
@@ -249,6 +286,120 @@ onBeforeUnmount(() => {
 .dot.active {
   background: #0055aa;
   transform: scale(1.4);
+}
+
+/* ---------- LIGHTBOX ---------- */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:40px 20px;
+
+  background:rgba(6,16,35,.35);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  z-index:9999;
+}
+
+.lightbox-content{
+  position:relative;
+
+  width:min(980px,92vw);
+  max-height:88vh;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  background:white;
+
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+
+  animation:popup .35s ease;
+
+  margin-top:25px;
+}
+
+.lightbox-content video,
+.lightbox-content img{
+  width:100%;
+  max-height:72vh;
+  object-fit:contain;
+  background:#071321;
+}
+
+.lightbox-info {
+  padding: 26px;
+}
+
+.lightbox-info h3 {
+  color: #003366;
+  margin-bottom: 12px;
+}
+
+.lightbox-info p {
+  color: #64748b;
+}
+
+.close-btn{
+  position:absolute;
+  top:18px;
+  right:18px;
+
+  width:44px;
+  height:44px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+
+  color:#003366;
+
+  font-size:22px;
+  cursor:pointer;
+
+  transition:.25s;
+
+  z-index:5;
+}
+
+.close-btn:hover{
+  transform:scale(1.08) rotate(90deg);
+  background:white;
+}
+
+/* ---------- ANIMATION ---------- */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: .25s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes popup {
+
+  from {
+    transform: translateY(25px) scale(.94);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+
 }
 
 @media(max-width:768px) {
