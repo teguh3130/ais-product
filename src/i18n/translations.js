@@ -26,8 +26,10 @@ export const translations = {
 
         about: {
             subtitle: "Tentang AISITS",
-            description:
-                "AISITS adalah sistem identifikasi otomatis dan perangkat keselamatan maritim yang dikembangkan oleh ITS untuk mencegah kecelakaan di laut. Sistem ini memanfaatkan teknologi AIS untuk memantau pergerakan kapal secara real-time, memberikan informasi penting kepada pengguna, dan meningkatkan keselamatan pelayaran. Fungsi Utama sistem ini adalah Menerima, menyimpan, dan memproses data AIS dari kapal dan platform lepas pantai (offshore platform) untuk mengamankan navigasi, melindungi pipa bawah laut (subsea pipeline), serta platform lepas pantai."
+            description:{
+                1: "AISITS adalah sistem identifikasi otomatis dan perangkat keselamatan maritim yang dikembangkan oleh ITS untuk mencegah kecelakaan di laut. Sistem ini memanfaatkan teknologi AIS untuk memantau pergerakan kapal secara real-time, memberikan informasi penting kepada pengguna, dan meningkatkan keselamatan pelayaran.",
+                2: "Fungsi Utama sistem ini adalah Menerima, menyimpan, dan memproses data AIS dari kapal dan platform lepas pantai (offshore platform) untuk mengamankan navigasi, melindungi pipa bawah laut (subsea pipeline), serta platform lepas pantai."
+            }
         },
 
         fitur: {
@@ -137,8 +139,10 @@ export const translations = {
 
         about: {
             subtitle: "About AISITS",
-            description:
-                "AISITS is an automatic identification system and maritime safety device developed by ITS to prevent accidents at sea. This system utilizes AIS technology to monitor vessel movements in real-time, provide important information to users, and enhance maritime safety. The main function of this system is to receive, store, and process AIS data from vessels and offshore platforms to ensure navigation safety, protect subsea pipelines, and support offshore platforms."
+            description:{
+                1: "AISITS is an automatic identification system and maritime safety device developed by ITS to prevent accidents at sea. This system utilizes AIS technology to monitor vessel movements in real-time, provide important information to users, and enhance maritime safety.",
+                2: "The main function of this system is to receive, store, and process AIS data from vessels and offshore platforms to ensure navigation safety, protect subsea pipelines, and support offshore platforms."
+            }
         },
 
         fitur: {

@@ -402,21 +402,43 @@ onBeforeUnmount(() => {
 
 }
 
-@media(max-width:768px) {
+@media(max-width:768px){
 
-  .carousel {
-    height: 320px;
-  }
+.gallery{
+padding:80px 18px;
+}
 
-  .card {
-    width: 88%;
-  }
+.carousel{
+height:260px;
+}
 
-  .card.left,
-  .card.right {
-    opacity: 0;
-    transform: translateX(-50%) scale(.9);
-  }
+.card{
+width:94%;
+}
+
+.card.left,
+.card.right{
+opacity:0;
+transform:translateX(-50%) scale(.9);
+}
+
+.overlay{
+padding:22px;
+}
+
+.overlay h3{
+font-size:20px;
+}
+
+.overlay p{
+font-size:14px;
+}
+
+.nav{
+width:46px;
+height:46px;
+font-size:20px;
+}
 
 }
 </style>

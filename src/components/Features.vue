@@ -53,4 +53,21 @@ const Features = [
     color: #00285a;
     margin-bottom: 40px;
 }
+
+@media(max-width:768px){
+
+.fitur{
+padding:80px 20px;
+}
+
+.fitur-title{
+font-size:30px;
+}
+
+.container{
+grid-template-columns:1fr;
+gap:22px;
+}
+
+}
 </style>

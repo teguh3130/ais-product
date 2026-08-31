@@ -138,11 +138,26 @@ button:hover {
   background: #003366;
 }
 
-@media(max-width:768px) {
+@media(max-width:768px){
 
-  .container {
-    flex-direction: column;
-  }
+.contact{
+padding:80px 20px;
+}
+
+.contact-container{
+display:flex;
+flex-direction:column;
+gap:28px;
+}
+
+.contact-info{
+text-align:center;
+}
+
+.contact iframe{
+width:100%;
+height:250px;
+}
 
 }
 </style>

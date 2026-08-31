@@ -154,5 +154,9 @@ const products = [
     align-items: center;
   }
 
+  .footer-brand img{
+    width: 100%;
+  }
+
 }
 </style>

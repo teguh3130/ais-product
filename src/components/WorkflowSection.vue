@@ -17,14 +17,18 @@
           {{ step.icon }}
         </div>
 
-        <span class="number">
-          {{ step.number }}
-        </span>
+        <div class="content">
 
-        <h3 data-aos="fade-right" data-aos-delay="700">{{ step.title }}</h3>
+          <span class="number">
+            {{ step.number }}
+          </span>
 
-        <p data-aos="fade-right" data-aos-delay="700">{{ step.description }}</p>
+          <h3 data-aos="fade-right" data-aos-delay="700">{{ step.title }}</h3>
 
+          <p data-aos="fade-right" data-aos-delay="700">{{ step.description }}</p>
+
+        </div>
+        
       </div>
 
     </div>
@@ -106,6 +110,11 @@ h2 {
   gap: 30px;
 }
 
+.content{
+  display:flex;
+  flex-direction:column;
+}
+
 .step {
   text-align: center;
   position: relative;
@@ -144,8 +153,8 @@ h2 {
   align-items: center;
   font-size: 40px;
   box-shadow: 0 15px 30px rgba(0, 85, 170, .25);
-  opacity: 0;
-  transform: translateY(25px) scale(.85);
+  opacity: 1;
+  /* transform: translateY(25px) scale(.85); */
 }
 
 .number {
@@ -163,6 +172,10 @@ h2 {
 .step p {
   color: #666;
   line-height: 1.7;
+}
+
+.workflow.active .step .circle{
+  animation:popUp .5s ease forwards;
 }
 
 .workflow.active .step::after {
@@ -221,11 +234,92 @@ img {
 
 }
 
-@media(max-width:600px) {
+@media(max-width:768px){
 
-  .timeline {
-    grid-template-columns: 1fr;
+  .workflow{
+    padding:80px 22px;
   }
 
+  .header{
+    margin-bottom:45px;
+  }
+
+  .header h2{
+    font-size:32px;
+  }
+
+  .header p{
+    font-size:15px;
+  }
+
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    gap:36px;
+    position:relative;
+  }
+
+  /* garis vertikal */
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:30px;
+    top:30px;
+    bottom:30px;
+    width:3px;
+    background:#4AA3FF;
+    border-radius:999px;
+  }
+
+  .step{
+    display:grid;
+    grid-template-columns:60px 1fr;
+    gap:18px;
+    align-items:start;
+    text-align:left;
+    position:relative;
+  }
+
+  .step::after{
+    display:none;
+  }
+
+  .circle{
+    width:60px;
+    height:60px;
+    margin:0;
+    font-size:28px;
+    z-index:2;
+  }
+
+  .content{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .number{
+    display:none;
+  }
+
+  .content h3{
+    margin:0;
+    font-size:20px;
+    color:#003366;
+  }
+
+  .content p{
+    margin:0;
+    font-size:15px;
+    line-height:1.8;
+    color:#666;
+  }
+
+  img{
+    width:100%;
+    margin:45px 0 0;
+    border-width:8px;
+    border-radius:16px;
+  }
 }
 </style>
