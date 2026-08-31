@@ -260,15 +260,16 @@ img {
   }
 
   /* garis vertikal */
-  .timeline::before{
+  .step:not(:last-child)::before{
     content:"";
     position:absolute;
-    left:30px;
-    top:30px;
-    bottom:30px;
+    left:29px;      /* sejajar dengan tengah icon */
+    top:60px;       /* mulai dari bawah icon */
     width:3px;
+    height:calc(100% + 36px); /* sambung ke langkah berikutnya */
     background:#4AA3FF;
     border-radius:999px;
+    z-index:1;
   }
 
   .step{
@@ -282,10 +283,6 @@ img {
 
   .step::after{
     display:none;
-  }
-
-  .step:last-child::after {
-    display: none;
   }
 
   .circle{
