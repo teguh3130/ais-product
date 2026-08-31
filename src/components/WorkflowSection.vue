@@ -284,6 +284,10 @@ img {
     display:none;
   }
 
+  .step:last-child::after {
+    display: none;
+  }
+
   .circle{
     width:60px;
     height:60px;
