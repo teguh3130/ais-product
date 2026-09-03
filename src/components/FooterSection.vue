@@ -4,7 +4,7 @@
 
       <!-- Kolom 1 -->
       <div class="footer-brand">
-        <img src="../assets/gambar/logo-aisits-2.png" alt="AIS ITS Logo" width="350">
+        <img src="../assets/gambar/logo-aisits-2.png" alt="AIS ITS Logo" width="100%">
         <!-- <h2>AIS ITS</h2> -->
 
         <p>

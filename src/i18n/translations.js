@@ -1,3 +1,5 @@
+import img1 from "../assets/gambar/1.png"
+import img2 from "../assets/gambar/2.png"
 export const translations = {
     id: {
         nav: {
@@ -49,6 +51,7 @@ export const translations = {
         workflow: {
             subtitle: "Alur Sistem",
             title: "Bagaimana AIS ITS Bekerja?",
+            img: img1,
             description:
                 "Automatic Identification System (AIS) bekerja dengan mengirimkan data kapal secara otomatis. AIS ITS kemudian menerima, memproses, dan menyajikan informasi tersebut agar mudah dipantau oleh pengguna.",
 
@@ -162,6 +165,7 @@ export const translations = {
         workflow: {
             subtitle: "System Flow",
             title: "How Does AIS ITS Work?",
+            img: img2,
             description:
                 "The Automatic Identification System (AIS) automatically transmits vessel information. AIS ITS receives, processes, and presents the data for users.",
 

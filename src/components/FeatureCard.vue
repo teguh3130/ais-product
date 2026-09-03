@@ -3,7 +3,7 @@
     <div class="card" data-aos="flip-left" data-aos-duration="5000" data-aos-delay="300">
 
         <div class="icon">
-            <img :src="icon" alt={{ title }} width="250" />
+            <img :src="icon" alt={{ title }} width="100%" />
         </div>
 
         <h3>{{ t.fitur.title[title] }}</h3>

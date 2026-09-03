@@ -33,7 +33,7 @@
 
     </div>
 
-    <img src="../assets/gambar/kapal-bg.webp" alt="Workflow" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1000"/>
+    <img :src="t.workflow.img" alt="Workflow" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1000"/>
 
   </section>
 </template>
