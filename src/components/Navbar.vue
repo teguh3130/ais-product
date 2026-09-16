@@ -99,6 +99,7 @@ onBeforeUnmount(() => {
   left: 0;
   display: flex;
   width: 100%;
+  height: 5.5rem;
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem var(--content-gutter);
@@ -123,7 +124,7 @@ onBeforeUnmount(() => {
 }
 
 .brand img {
-  width: 90px;
+  width: 18%;
   height: auto;
   object-fit: contain;
 }
@@ -140,8 +141,8 @@ onBeforeUnmount(() => {
 .mobile-navigation a {
   position: relative;
   color: var(--color-muted);
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.9925rem;
+  font-weight: 800;
   text-decoration: none;
   transition: color 0.25s ease;
 }

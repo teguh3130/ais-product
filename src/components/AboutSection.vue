@@ -1,7 +1,7 @@
 <script setup>
 import { inject } from 'vue'
 import overviewImage from '../assets/gambar/1.png'
-import shipImage from '../assets/gambar/kapal-bg.webp'
+import shipImage from '../assets/gambar/safety.jpeg'
 
 const t = inject('t')
 </script>
@@ -25,7 +25,7 @@ const t = inject('t')
 
     <div class="editorial-row editorial-row-reverse" data-aos="fade-up">
       <div class="editorial-media">
-        <img alt="Vessel tracked by AIS ITS" loading="lazy" />
+        <img :src="shipImage" alt="Vessel tracked by AIS ITS" loading="lazy" />
       </div>
       <div class="editorial-copy">
         <span class="section-index">02 / SAFETY</span>
