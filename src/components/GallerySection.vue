@@ -1,444 +1,290 @@
 <script setup>
-import { inject, ref, onMounted, onBeforeUnmount } from 'vue'
-
+import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue'
 import demoVideo from '../assets/video/test.mp4'
-import ews from '../assets/gambar/ews.png'
-import inspection from '../assets/gambar/spesification.png'
-import movement from '../assets/gambar/trackmap.png'
+import ewsImage from '../assets/gambar/ews.png'
+import inspectionImage from '../assets/gambar/spesification.png'
+import movementImage from '../assets/gambar/trackmap.png'
 
 const t = inject('t')
-
-const slides = [
-  {
-    type: 'video',
-    file: demoVideo
-  },
-  {
-    type: 'image',
-    file: ews
-  },
-  {
-    type: 'image',
-    file: inspection
-  },
-  {
-    type: 'image',
-    file: movement
-  }
-]
-
-const current = ref(0)
-
 const selectedSlide = ref(null)
 
-const openModal = (slide) => {
+const slides = computed(() => [
+  { key: 1, type: 'video', file: demoVideo },
+  { key: 2, type: 'image', file: ewsImage },
+  { key: 3, type: 'image', file: inspectionImage },
+  { key: 4, type: 'image', file: movementImage },
+])
+
+const openLightbox = (slide) => {
   selectedSlide.value = slide
 }
 
-const closeModal = () => {
+const closeLightbox = () => {
   selectedSlide.value = null
 }
 
-const nextSlide = () => {
-  current.value = (current.value + 1) % slides.length
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') closeLightbox()
 }
 
-const prevSlide = () => {
-  current.value = (current.value - 1 + slides.length) % slides.length
-}
-
-let interval
-
-onMounted(() => {
-  interval = setInterval(nextSlide, 5000)
-})
-
-onBeforeUnmount(() => {
-  clearInterval(interval)
-})
-
+onMounted(() => window.addEventListener('keydown', handleKeydown))
+onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
 </script>
+
 <template>
-
   <section id="gallery" class="gallery">
-
-    <div class="header" data-aos="fade-down" data-aos-delay="300" data-aos-duration="1000">
-      <h2 class="subtitle">{{ t.gallery.header[1] }}</h2>
-
-      <h3>{{ t.gallery.header[2] }}</h3>
-
-      {{ t.gallery.header[3] }}
-
-    </div>
-
-    <div class="carousel-wrapper">
-
-      <button class="nav prev" @click="prevSlide">
-        ❮
-
-      </button>
-
-      <div class="carousel" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="500">
-
-        <div v-for="(slide, index) in slides" :key="index" class="card" @click="index === current && openModal(slide)"
-          :class="{
-            active: index === current,
-            left: index === ((current - 1 + slides.length) % slides.length),
-            right: index === ((current + 1) % slides.length)
-          }">
-
-          <video v-if="slide.type === 'video'" :src="slide.file" autoplay muted loop playsinline></video>
-
-          <img v-else :src="slide.file" :alt="t.gallery.judul[index + 1]" />
-
-          <div class="overlay">
-
-            <!-- <badge>{{ slide.type === 'video' ? 'Demo' : 'Product' }}</badge> -->
-
-            {{ t.gallery.judul[index + 1] }} #
-            {{ t.gallery.deskripsi[index + 1] }}
-
-          </div>
-
-        </div>
-
+    <div class="gallery-intro" data-aos="fade-up">
+      <div>
+        <span class="eyebrow">IN THE FIELD</span>
+        <h2>{{ t.gallery.header[2] }}</h2>
       </div>
+      <p>{{ t.gallery.header[3] }}</p>
+    </div>
 
-      <button class="nav next" @click="nextSlide">
-        ❯
-
+    <div class="gallery-grid">
+      <button
+        v-for="(slide, index) in slides"
+        :key="slide.key"
+        class="gallery-item"
+        :class="`gallery-item-${index + 1}`"
+        type="button"
+        data-aos="fade-up"
+        :data-aos-delay="index * 100"
+        @click="openLightbox(slide)"
+      >
+        <video v-if="slide.type === 'video'" :src="slide.file" muted loop autoplay playsinline></video>
+        <img v-else :src="slide.file" :alt="t.gallery.judul[slide.key]" loading="lazy" />
+        <span class="gallery-label">{{ t.gallery.judul[slide.key] }} <b aria-hidden="true">↗</b></span>
       </button>
-
     </div>
 
-    <div class="dots">
-
-      <span v-for="(_, index) in slides" :key="index" class="dot" :class="{ active: index === current }"
-        @click="current = index"></span>
-
-    </div>
-
-    <Transition name="fade">
-
-      <div v-if="selectedSlide" class="lightbox" @click="closeModal">
-
-        <div class="lightbox-content" @click.stop>
-
-          <button class="close-btn" @click="closeModal">
-            ✕
-          </button>
-
-          <video v-if="selectedSlide.type === 'video'" :src="selectedSlide.file" controls autoplay muted></video>
-
-          <img v-else :src="selectedSlide.file" :alt="selectedSlide.title">
-
-          <div class="lightbox-info">
-            <h3>{{ selectedSlide.title }}</h3>
-            <p>{{ selectedSlide.description }}</p>
+    <Transition name="lightbox">
+      <div v-if="selectedSlide" class="lightbox" role="dialog" aria-modal="true" @click="closeLightbox">
+        <div class="lightbox-panel" @click.stop>
+          <button class="close-button" type="button" aria-label="Close gallery" @click="closeLightbox">×</button>
+          <video
+            v-if="selectedSlide.type === 'video'"
+            :src="selectedSlide.file"
+            controls
+            autoplay
+            muted
+            playsinline
+          ></video>
+          <img v-else :src="selectedSlide.file" :alt="t.gallery.judul[selectedSlide.key]" />
+          <div class="lightbox-copy">
+            <span class="eyebrow">AIS ITS / {{ String(selectedSlide.key).padStart(2, '0') }}</span>
+            <h3>{{ t.gallery.judul[selectedSlide.key] }}</h3>
+            <p>{{ t.gallery.deskripsi[selectedSlide.key] }}</p>
           </div>
-
         </div>
-
       </div>
-
     </Transition>
-
   </section>
-
 </template>
+
 <style scoped>
 .gallery {
-  padding: 100px 30px;
-  background: #f8fafc;
-  overflow: hidden;
+  padding: var(--section-space) var(--content-gutter);
+  background: var(--color-background);
 }
 
-.header {
-  text-align: center;
-  max-width: 700px;
-  margin: auto auto 60px;
+.gallery-intro,
+.gallery-grid {
+  width: min(100%, var(--content-width));
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.subtitle {
-  color: #007bff;
-  font-weight: bold;
+.gallery-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
+  align-items: end;
+  gap: 4rem;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
 }
 
-.header h2 {
-  font-size: 42px;
-  color: #003366;
-  margin: 15px 0;
+.eyebrow {
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
-.header h3 {
-  color: #003366;
-  margin: 15px 0;
+.gallery h2 {
+  max-width: 12ch;
+  margin: 1.25rem 0 0;
+  color: var(--color-text);
+  font-size: clamp(3rem, 6vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 1;
 }
 
-.carousel-wrapper {
+.gallery-intro p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.gallery-grid {
+  columns: 2 20rem;
+  column-gap: 1rem;
+}
+
+.gallery-item {
   position: relative;
+  display: block;
+  width: 100%;
+  min-height: 18rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-image);
+  background: var(--color-surface);
+  cursor: zoom-in;
+  break-inside: avoid;
+}
+
+.gallery-item-1 {
+  min-height: 27rem;
+}
+
+.gallery-item-3 {
+  min-height: 24rem;
+}
+
+.gallery-item video,
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s ease;
+}
+
+.gallery-item img {
+  object-fit: contain;
+  padding: 1rem;
+  background: #eef3ff;
+}
+
+.gallery-item:hover video,
+.gallery-item:hover img {
+  filter: brightness(0.78);
+  transform: scale(1.045);
+}
+
+.gallery-label {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: var(--radius-pill);
+  color: #fff;
+  background: rgba(17, 17, 17, 0.28);
+  backdrop-filter: blur(12px);
+  font-size: 0.8rem;
+  text-align: left;
 }
 
-.carousel {
+.gallery-label b {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.lightbox {
+  position: fixed;
+  margin-top: 80px;
+  z-index: 2000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(17, 17, 17, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.lightbox-panel {
   position: relative;
+  width: min(100%, 68rem);
+  max-height: 94svh;
+  overflow: auto;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.24);
+}
+
+.lightbox-panel video,
+.lightbox-panel > img {
+  display: block;
   width: 100%;
-  max-width: 1200px;
-  height: 460px;
+  max-height: 70svh;
+  object-fit: contain;
+  background: #111;
 }
 
-.card {
+.lightbox-copy {
+  padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem) 2rem;
+}
+
+.lightbox-copy h3 {
+  margin: 0.8rem 0 0.35rem;
+  color: var(--color-text);
+  font-size: 1.5rem;
+}
+
+.lightbox-copy p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.close-button {
   position: absolute;
-  top: 0;
-  left: 50%;
-  width: 68%;
-  height: 100%;
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
-  transition: .6s ease;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%) scale(.85);
-}
-
-.card img,
-.card video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border: 7px solid rgb(98, 98, 202);
-  border-radius: 22px;
-}
-
-.card.active {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-  z-index: 3;
-  pointer-events: auto;
-}
-
-.card.left {
-  opacity: .75;
-  transform: translateX(-92%) scale(.82);
-  z-index: 2;
-}
-
-.card.right {
-  opacity: .75;
-  transform: translateX(-8%) scale(.82);
-  z-index: 2;
-}
-
-.overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 28px;
-  color: white;
-  background: linear-gradient(transparent, rgba(0, 20, 60, .9));
-}
-
-.nav {
-  position: absolute;
-  width: 58px;
-  height: 58px;
-  border: none;
+  z-index: 1;
+  top: 1rem;
+  right: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
   border-radius: 50%;
-  background: white;
-  font-size: 28px;
-  cursor: pointer;
-  z-index: 5;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.86);
+  font-size: 1.7rem;
+  line-height: 1;
 }
 
-.prev {
-  left: 10px;
+.lightbox-enter-active,
+.lightbox-leave-active {
+  transition: opacity 0.3s ease;
 }
 
-.next {
-  right: 10px;
-}
-
-.nav:hover {
-  transform: scale(1.05);
-}
-
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 35px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #cbd5e1;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.dot.active {
-  background: #0055aa;
-  transform: scale(1.4);
-}
-
-/* ---------- LIGHTBOX ---------- */
-
-.lightbox{
-  position:fixed;
-  inset:0;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  padding:40px 20px;
-
-  background:rgba(6,16,35,.35);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-
-  z-index:9999;
-}
-
-.lightbox-content{
-  position:relative;
-
-  width:min(980px,92vw);
-  max-height:88vh;
-
-  overflow:hidden;
-
-  border-radius:22px;
-
-  background:white;
-
-  box-shadow:0 30px 80px rgba(0,0,0,.35);
-
-  animation:popup .35s ease;
-
-  margin-top:25px;
-}
-
-.lightbox-content video,
-.lightbox-content img{
-  width:100%;
-  max-height:72vh;
-  object-fit:contain;
-  background:#071321;
-}
-
-.lightbox-info {
-  padding: 26px;
-}
-
-.lightbox-info h3 {
-  color: #003366;
-  margin-bottom: 12px;
-}
-
-.lightbox-info p {
-  color: #64748b;
-}
-
-.close-btn{
-  position:absolute;
-  top:18px;
-  right:18px;
-
-  width:44px;
-  height:44px;
-
-  border:none;
-  border-radius:50%;
-
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(8px);
-
-  color:#003366;
-
-  font-size:22px;
-  cursor:pointer;
-
-  transition:.25s;
-
-  z-index:5;
-}
-
-.close-btn:hover{
-  transform:scale(1.08) rotate(90deg);
-  background:white;
-}
-
-/* ---------- ANIMATION ---------- */
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: .25s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
+.lightbox-enter-from,
+.lightbox-leave-to {
   opacity: 0;
 }
 
-@keyframes popup {
-
-  from {
-    transform: translateY(25px) scale(.94);
-    opacity: 0;
+@media (max-width: 760px) {
+  .gallery-intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  to {
-    transform: translateY(0px) scale(1);
-    opacity: 1;
+  .gallery-grid {
+    columns: 1;
   }
 
-}
-
-@media(max-width:768px){
-
-.gallery{
-padding:80px 18px;
-}
-
-.carousel{
-height:260px;
-}
-
-.card{
-width:94%;
-}
-
-.card.left,
-.card.right{
-opacity:0;
-transform:translateX(-50%) scale(.9);
-}
-
-.overlay{
-padding:22px;
-}
-
-.overlay h3{
-font-size:20px;
-}
-
-.overlay p{
-font-size:14px;
-}
-
-.nav{
-width:46px;
-height:46px;
-font-size:20px;
-}
-
+  .gallery-item,
+  .gallery-item-1,
+  .gallery-item-3 {
+    min-height: 17rem;
+  }
 }
 </style>

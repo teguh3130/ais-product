@@ -1,326 +1,240 @@
-<template>
-  <section id="workflow" class="workflow" ref="workflowSection" :class="{ 'active': isVisible }">
-
-    <div class="header">
-      <span class="subtitle" data-aos="fade-down" data-aos-delay="700">{{ t.workflow.subtitle }}</span>
-
-      <h2 data-aos="zoom-in" data-aos-delay="200">{{ t.workflow.title }}</h2>
-
-      <p data-aos="zoom-in" data-aos-delay="300">{{ t.workflow.description }}</p>
-    </div>
-
-    <div class="timeline">
-
-      <div class="step" v-for="step in steps" :key="step.number">
-
-        <div class="circle">
-          {{ step.icon }}
-        </div>
-
-        <div class="content">
-
-          <span class="number">
-            {{ step.number }}
-          </span>
-
-          <h3 data-aos="fade-right" data-aos-delay="700">{{ step.title }}</h3>
-
-          <p data-aos="fade-right" data-aos-delay="700">{{ step.description }}</p>
-
-        </div>
-        
-      </div>
-
-    </div>
-
-    <img :src="t.workflow.img" alt="Workflow" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1000"/>
-
-  </section>
-</template>
-
 <script setup>
-import { inject, computed, ref, onMounted } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const t = inject('t')
-
 const steps = computed(() => t.value.workflow.steps)
-
 const workflowSection = ref(null)
 const isVisible = ref(false)
+let observer
 
 onMounted(() => {
-  if (!workflowSection.value) return
-
-  const observer = new IntersectionObserver(
-
+  observer = new IntersectionObserver(
     ([entry]) => {
-
-      if (entry.isIntersecting) {
-        isVisible.value = true
-      }
-
+      if (entry.isIntersecting) isVisible.value = true
     },
-
-    {
-      threshold: 0.3
-    }
-
+    { threshold: 0.25 },
   )
 
-  observer.observe(workflowSection.value)
+  if (workflowSection.value) observer.observe(workflowSection.value)
+})
 
+onBeforeUnmount(() => {
+  observer?.disconnect()
 })
 </script>
 
+<template>
+  <section id="workflow" ref="workflowSection" class="workflow" :class="{ visible: isVisible }">
+    <div class="workflow-intro" data-aos="fade-up">
+      <div>
+        <span class="eyebrow">HOW IT WORKS</span>
+        <h2>{{ t.workflow.title }}</h2>
+      </div>
+      <p>{{ t.workflow.description }}</p>
+    </div>
+
+    <div class="timeline" aria-label="AIS ITS workflow">
+      <div class="timeline-line" aria-hidden="true"></div>
+      <article v-for="(step, index) in steps" :key="step.number" class="step">
+        <div class="step-marker">
+          <span>{{ step.number }}</span>
+        </div>
+        <div class="step-content">
+          <span class="step-icon" aria-hidden="true">{{ step.icon }}</span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="workflow-visual" data-aos="fade-up">
+      <img :src="t.workflow.img" alt="AIS ITS workflow visualization" loading="lazy" />
+    </div>
+  </section>
+</template>
+
 <style scoped>
 .workflow {
-  padding: 100px 40px;
-  background: white;
+  padding: var(--section-space) var(--content-gutter);
+  background: var(--color-background);
 }
 
-.header {
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  margin-bottom: 70px;
+.workflow-intro,
+.timeline,
+.workflow-visual {
+  width: min(100%, var(--content-width));
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.subtitle {
-  color: #0066cc;
-  font-weight: bold;
+.workflow-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
+  align-items: end;
+  gap: 4rem;
+  margin-bottom: clamp(4rem, 9vw, 8rem);
 }
 
-h2 {
-  font-size: 42px;
-  color: #003366;
-  margin: 15px 0;
+.eyebrow,
+.step-icon {
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
-.header p {
-  color: #666;
-  line-height: 1.8;
+.workflow h2 {
+  max-width: 11ch;
+  margin: 1.25rem 0 0;
+  color: var(--color-text);
+  font-size: clamp(3rem, 6vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 1;
+}
+
+.workflow-intro > p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  line-height: 1.75;
 }
 
 .timeline {
-  max-width: 1200px;
-  margin: auto;
-
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: clamp(1rem, 3vw, 3rem);
 }
 
-.content{
-  display:flex;
-  flex-direction:column;
-}
-
-.step {
-  text-align: center;
-  position: relative;
-}
-
-.step::after {
-  content: "";
+.timeline-line {
   position: absolute;
-  top: 45px;
-  left: 60%;
-  width: 90%;
-  height: 4px;
-  background: #4AA3FF;
-  border-radius: 999px;
+  top: 2.1rem;
+  right: 9%;
+  left: 5%;
+  height: 3px;
+  background: var(--color-border);
+}
+
+.timeline-line::after {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  content: '';
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 2s ease;
-  z-index: 0;
+  transition: transform 6.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.step:last-child::after {
-  display: none;
-}
-
-.circle {
-  width: 90px;
-  height: 90px;
-  position: relative;
-  z-index: 2;
-  margin: auto;
-  border-radius: 50%;
-  background: #0055aa;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
-  box-shadow: 0 15px 30px rgba(0, 85, 170, .25);
-  opacity: 1;
-  /* transform: translateY(25px) scale(.85); */
-}
-
-.number {
-  display: inline-block;
-  margin-top: 18px;
-  color: #007bff;
-  font-weight: bold;
-}
-
-.step h3 {
-  margin: 15px 0;
-  color: #003366;
-}
-
-.step p {
-  color: #666;
-  line-height: 1.7;
-}
-
-.workflow.active .step .circle{
-  animation:popUp .5s ease forwards;
-}
-
-.workflow.active .step::after {
+.workflow.visible .timeline-line::after {
   transform: scaleX(1);
 }
 
-.workflow.active .step:nth-child(1) .circle {
-  animation: popUp .5s ease forwards;
-  animation-delay: .2s;
+.step {
+  position: relative;
+  z-index: 1;
 }
 
-.workflow.active .step:nth-child(2) .circle {
-  animation: popUp .5s ease forwards;
-  animation-delay: .5s;
+.step-marker {
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: transform 0.35s ease, color 0.35s ease, background 0.35s ease;
 }
 
-.workflow.active .step:nth-child(3) .circle {
-  animation: popUp .5s ease forwards;
-  animation-delay: .8s;
+.step:hover .step-marker {
+  color: #fff;
+  background: var(--color-accent);
+  transform: translateY(-0.35rem);
 }
 
-.workflow.active .step:nth-child(4) .circle {
-  animation: popUp .5s ease forwards;
-  animation-delay: 1.1s;
+.step-content {
+  max-width: 14rem;
+  padding-top: 2rem;
 }
 
-img {
-  width: 97%;
-  height: auto;
-  margin: 20px;
+.step-icon {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+}
+
+.step h3 {
+  margin: 0 0 0.8rem;
+  color: var(--color-text);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.step p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.workflow-visual {
+  margin-top: clamp(5rem, 11vw, 10rem);
+  overflow: hidden;
+  border-radius: var(--radius-image);
+  background: var(--color-surface);
+}
+
+.workflow-visual img {
+  width: 100%;
+  max-height: 34rem;
   object-fit: cover;
-  border: #2e5a6b 13px solid;
-  border-radius: 10px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.753);
+  object-position: center;
 }
 
-@media(max-width:900px) {
+@media (max-width: 800px) {
+  .workflow-intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
   .timeline {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    padding-left: 1rem;
   }
 
-}
-
-@keyframes popUp {
-
-  from {
-    opacity: 0;
-    transform: translateY(25px) scale(.85);
+  .timeline-line {
+    top: 2.1rem;
+    bottom: 2.1rem;
+    left: 3.1rem;
+    width: 1px;
+    height: auto;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+  .timeline-line::after {
+    transform: scaleY(0);
+    transform-origin: top;
   }
 
-}
-
-@media(max-width:768px){
-
-  .workflow{
-    padding:80px 22px;
+  .workflow.visible .timeline-line::after {
+    transform: scaleY(1);
   }
 
-  .header{
-    margin-bottom:45px;
+  .step {
+    display: grid;
+    grid-template-columns: 4.25rem 1fr;
+    gap: 1.5rem;
   }
 
-  .header h2{
-    font-size:32px;
-  }
-
-  .header p{
-    font-size:15px;
-  }
-
-  .timeline{
-    display:flex;
-    flex-direction:column;
-    gap:36px;
-    position:relative;
-  }
-
-  /* garis vertikal */
-  .step:not(:last-child)::before{
-    content:"";
-    position:absolute;
-    left:29px;      /* sejajar dengan tengah icon */
-    top:60px;       /* mulai dari bawah icon */
-    width:3px;
-    height:calc(100% + 36px); /* sambung ke langkah berikutnya */
-    background:#4AA3FF;
-    border-radius:999px;
-    z-index:1;
-  }
-
-  .step{
-    display:grid;
-    grid-template-columns:60px 1fr;
-    gap:18px;
-    align-items:start;
-    text-align:left;
-    position:relative;
-  }
-
-  .step::after{
-    display:none;
-  }
-
-  .circle{
-    width:60px;
-    height:60px;
-    margin:0;
-    font-size:28px;
-    z-index:2;
-  }
-
-  .content{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
-
-  .number{
-    display:none;
-  }
-
-  .content h3{
-    margin:0;
-    font-size:20px;
-    color:#003366;
-  }
-
-  .content p{
-    margin:0;
-    font-size:15px;
-    line-height:1.8;
-    color:#666;
-  }
-
-  img{
-    width:100%;
-    margin:45px 0 0;
-    border-width:8px;
-    border-radius:16px;
+  .step-content {
+    max-width: 32rem;
+    padding-top: 0.35rem;
   }
 }
 </style>

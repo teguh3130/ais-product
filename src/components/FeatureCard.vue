@@ -1,64 +1,109 @@
-<template>
-
-    <div class="card" data-aos="flip-left" data-aos-duration="5000" data-aos-delay="300">
-
-        <div class="icon">
-            <img :src="icon" alt={{ title }} width="100%" />
-        </div>
-
-        <h3>{{ t.fitur.title[title] }}</h3>
-
-        <p>{{ t.fitur.description[title] }}</p>
-
-    </div>
-
-
-
-</template>
-
 <script setup>
-
 import { inject } from 'vue'
 
 const t = inject('t')
-const language = inject('language')
-const toggleLanguage = inject('toggleLanguage')
 
 defineProps({
-    icon: String,
-    title: String,
-    description: String
+  feature: {
+    type: Object,
+    required: true,
+  },
+  index: {
+    type: Number,
+    required: true,
+  },
 })
-
 </script>
 
+<template>
+  <article class="feature-card" :style="{ '--delay': `${index * 100}ms` }" data-aos="fade-up">
+    <div class="card-image">
+      <img :src="feature.image" :alt="t.fitur.title[feature.key]" loading="lazy" />
+    </div>
+    <div class="card-copy">
+      <span class="card-index">0{{ index + 1 }}</span>
+      <h3>{{ t.fitur.title[feature.key] }}</h3>
+      <p>{{ t.fitur.description[feature.key] }}</p>
+    </div>
+  </article>
+</template>
+
 <style scoped>
-.card {
-    background: white;
-    width: 100%;
-    padding: 35px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
-    text-align: center;
-    transition: .3s;
+.feature-card {
+  display: flex;
+  min-height: 34rem;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 17, 0.06);
+  border-radius: var(--radius-card);
+  background: rgba(247, 246, 242, 0.72);
+  box-shadow: 0 1.5rem 4rem rgba(17, 17, 17, 0.06);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
 }
 
-.card:hover {
-    transform: translateY(-8px);
+.feature-card:hover {
+  box-shadow: 0 2rem 5rem rgba(17, 17, 17, 0.1);
+  transform: translateY(-0.6rem);
 }
 
-.icon {
-    font-size: 42px;
-    margin-bottom: 20px;
+.card-image {
+  display: flex;
+  min-height: 16rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  background: linear-gradient(145deg, #eef3ff, #f8f8f5);
 }
 
-h3 {
-    color: #003366;
-    margin-bottom: 15px;
+.card-image img {
+  width: 100%;
+  height: 15rem;
+  object-fit: contain;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-p {
-    color: #666;
-    line-height: 1.7;
+.feature-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.75rem;
+}
+
+.card-index {
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.feature-card h3 {
+  margin: 1.5rem 0 0.9rem;
+  color: var(--color-text);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+
+.feature-card p {
+  margin: auto 0 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .feature-card {
+    min-height: 0;
+  }
+
+  .card-image {
+    min-height: 14rem;
+  }
 }
 </style>

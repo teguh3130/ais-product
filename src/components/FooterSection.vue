@@ -1,162 +1,135 @@
+<script setup>
+import { computed, inject } from 'vue'
+
+const t = inject('t')
+
+const navigation = computed(() => [
+  { label: t.value.nav[1], href: '#home' },
+  { label: t.value.nav[2], href: '#about' },
+  { label: t.value.nav[3], href: '#workflow' },
+  { label: t.value.nav[4], href: '#gallery' },
+  { label: t.value.nav[5], href: '#Fitur' },
+  { label: t.value.nav[6], href: '#contact' },
+])
+</script>
+
 <template>
   <footer class="footer">
-    <div class="container">
-
-      <!-- Kolom 1 -->
-      <div class="footer-brand">
-        <img src="../assets/gambar/logo-aisits-2.png" alt="AIS ITS Logo" width="100%">
-        <!-- <h2>AIS ITS</h2> -->
-
-        <p>
-          {{t.footer.deskripsi}}
-        </p>
-      </div>
-
-      <!-- Kolom 2 -->
-      <div class="footer-column">
-        <h3>Navigasi</h3>
-
-        <!-- <a v-for="link in navLinks" :key="link.name" :href="link.href">
-          {{ link.name }}
-        </a> -->
-        <a href="#">{{ t.nav[1] }}</a>
-        <a href="#about">{{ t.nav[2]}}</a>
-        <a href="#workflow">{{ t.nav[3] }}</a>
-        <a href="#gallery">{{ t.nav[4] }}</a>
-        <a href="#Fitur">{{ t.nav[5] }}</a>
-        <a href="#contact">{{ t.nav[6] }}</a>
-
-      </div>
-
-      <!-- Kolom 3 -->
-      <div class="footer-column">
-        <h3>Fitur Utama</h3>
-
-        <a v-for="product in products" :key="product" href="#Fitur">
-          {{ product }}
-        </a>
-
-      </div>
-
-      <!-- Kolom 4 -->
-      <div class="footer-column">
-        <h3>Kontak</h3>
-
-        <p>📍 Kampus ITS Surabaya</p>
-        <p>📧 aisits@its.ac.id</p>
-        <p>📞 +62 31 5994251</p>
-      </div>
-
+    <div class="footer-top">
+      <a class="footer-brand" href="#home" aria-label="AIS ITS home">
+        <img src="../assets/gambar/logo-aisits.png" alt="AIS ITS" />
+      </a>
+      <p>{{ t.footer.deskripsi }}</p>
+      <a class="back-to-top" href="#home" aria-label="Back to top">↑</a>
     </div>
 
     <div class="footer-bottom">
-      © 2026 AIS ITS. All Rights Reserved.
+      <span>© 2026 AIS ITS</span>
+      <nav aria-label="Footer navigation">
+        <a v-for="item in navigation" :key="item.href" :href="item.href">{{ item.label }}</a>
+      </nav>
+      <span>ITS Surabaya</span>
     </div>
   </footer>
 </template>
 
-<script setup>
-
-import { inject } from 'vue'
-
-const t = inject('t')
-
-// const navLinks = [
-//   { name: "Home", href: "#" },
-//   { name: "Tentang", href: "#about" },
-//   { name: "Fitur", href: "#Fitur" },
-//   { name: "Kontak", href: "#contact" }
-// ]
-
-const products = [
-  "Early Warning System",
-  "Ship Inspection System",
-  "Ship Movement Recording"
-]
-
-</script>
 <style scoped>
 .footer {
-  background: #14142b;
-  color: white;
-  padding-top: 70px;
+  padding: 3rem var(--content-gutter) 1.5rem;
+  color: var(--color-text);
+  background: var(--color-background);
 }
 
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 40px 50px;
-
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.2fr;
-  gap: 40px;
-}
-
-.footer-brand h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
-
-.footer-brand p {
-  color: #d5e6ff;
-  line-height: 1.8;
-}
-
-.footer-column h3 {
-  margin-bottom: 20px;
-  color: white;
-}
-
-.footer-column {
+.footer-top,
+.footer-bottom {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  width: min(100%, var(--content-width));
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.footer-column a {
-  color: #d5e6ff;
+.footer-top {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 5rem;
+}
+
+.footer-brand img {
+  width: 200px;
+  height: auto;
+}
+
+.footer-top p {
+  max-width: 22rem;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.back-to-top {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text);
   text-decoration: none;
-  transition: .3s;
+  transition: background 0.25s ease, transform 0.25s ease;
 }
 
-.footer-column a:hover {
-  color: #7ec8ff;
-  transform: translateX(5px);
-}
-
-.footer-column p {
-  color: #d5e6ff;
+.back-to-top:hover {
+  background: var(--color-surface);
+  transform: translateY(-3px);
 }
 
 .footer-bottom {
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid rgba(255, 255, 255, .15);
-  color: #c6d9f2;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.72rem;
 }
 
-@media(max-width:900px) {
-
-  .container {
-    grid-template-columns: 1fr 1fr;
-  }
-
+.footer-bottom nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
-@media(max-width:600px) {
+.footer-bottom a {
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
 
-  .container {
-    grid-template-columns: 1fr;
-    text-align: center;
+.footer-bottom a:hover {
+  color: var(--color-text);
+}
+
+@media (max-width: 760px) {
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding-bottom: 3rem;
   }
 
-  .footer-column {
-    align-items: center;
+  .footer-top p {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 
-  .footer-brand img{
-    width: 100%;
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
+  .footer-bottom nav {
+    justify-content: flex-start;
+  }
 }
 </style>

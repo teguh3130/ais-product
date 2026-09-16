@@ -1,73 +1,79 @@
 <script setup>
-import FeatureCard from './FeatureCard.vue'
-import EWSIcon from '../assets/gambar/ews.png'
-import InspectionIcon from '../assets/gambar/spesification.png'
-import MovementIcon from '../assets/gambar/trackmap.png'
 import { inject } from 'vue'
+import FeatureCard from './FeatureCard.vue'
+import ewsImage from '../assets/gambar/ews.png'
+import inspectionImage from '../assets/gambar/spesification.png'
+import movementImage from '../assets/gambar/trackmap.png'
 
 const t = inject('t')
 
-const Features = [
-    {
-        icon: EWSIcon,
-        title: '1',
-    },
-    {
-        icon: InspectionIcon,
-        title: '2',
-    },
-    {
-        icon: MovementIcon,
-        title: '3',
-    }
+const features = [
+  { key: '1', image: ewsImage },
+  { key: '2', image: inspectionImage },
+  { key: '3', image: movementImage },
 ]
 </script>
+
 <template>
-    <section id="Fitur" class="fitur">
-        <h2 class="fitur-title">{{ t.fitur.header }}</h2>
-        <div class="container">
-            <FeatureCard v-for="features in Features" :key="features.title" :icon="features.icon"
-                :title="features.title" :description="features.description" />
-        </div>
-    </section>
+  <section id="Fitur" class="features">
+    <div class="features-intro" data-aos="fade-up">
+      <span class="eyebrow">ONE SYSTEM. MANY SIGNALS.</span>
+      <h2>{{ t.fitur.header }}</h2>
+    </div>
+
+    <div class="feature-grid">
+      <FeatureCard
+        v-for="(feature, index) in features"
+        :key="feature.key"
+        :feature="feature"
+        :index="index"
+      />
+    </div>
+  </section>
 </template>
-<style>
-.container {
-    display: grid;
-    /* flex-direction: column; */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin: 20px;
+
+<style scoped>
+.features {
+  padding: var(--section-space) var(--content-gutter);
+  background: var(--color-surface);
 }
 
-.fitur {
-    padding: 100px 40px;
-    background-color: #f5f5f5;
+.features-intro,
+.feature-grid {
+  width: min(100%, var(--content-width));
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.fitur-title {
-    text-align: center;
-    font-size: 36px;
-    color: #00285a;
-    margin-bottom: 40px;
+.features-intro {
+  margin-bottom: clamp(3rem, 7vw, 6rem);
 }
 
-@media(max-width:768px){
-
-.fitur{
-padding:80px 20px;
+.eyebrow {
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
-.fitur-title{
-font-size:30px;
+.features h2 {
+  margin: 1.25rem 0 0;
+  color: var(--color-text);
+  font-size: clamp(3rem, 6vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 1;
 }
 
-.container{
-grid-template-columns:1fr;
-gap:22px;
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
+@media (max-width: 900px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

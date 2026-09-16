@@ -18,31 +18,15 @@ provide('t', t)
 </script>
 
 <template>
-  <div id="app" class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <div id="app" class="app-shell">
     <Navbar />
-    <main>
-      <Transition name="fade" mode="out-in">
-        <router-view />
-      </Transition>
+    <main class="app-main">
+      <router-view v-slot="{ Component }">
+        <Transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </router-view>
     </main>
     <FooterSection />
   </div>
 </template>
-
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.fade-enter-from {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-</style>

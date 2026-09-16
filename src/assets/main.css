@@ -1,48 +1,113 @@
-/* Reset CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+:root {
+  --color-background: #f8f8f5;
+  --color-surface: #ffffff;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-accent: #0a5cff;
+  --color-accent-hover: #004bd6;
+  --color-border: rgba(17, 24, 39, 0.1);
+  --color-overlay: rgba(17, 24, 39, 0.06);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --content-width: 1200px;
+  --content-gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-space: clamp(5rem, 11vw, 10rem);
+  --radius-card: 28px;
+  --radius-image: 32px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 20px 60px rgba(17, 24, 39, 0.08);
 }
 
-html{
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
   overflow-x: hidden;
-  scroll-behavior:smooth;
+  scroll-behavior: smooth;
+  background: var(--color-background);
 }
 
-body{
+body {
+  min-width: 320px;
+  min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  font-family: Arial, Helvetica, sans-serif;
-  background:white;
-  color:#333;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-img{
-max-width:100%;
-display:block;
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
-video{
-max-width:100%;
-display:block;
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
-#app{
-  width:100%;
-  min-height:100vh;
+a {
+  color: inherit;
 }
-.hero{
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+#app,
+.app-shell {
   width: 100%;
-  color:white;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:80px 20px 20px; /* 80px supaya tidak ketutup navbar */
-  background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('gambar/kapal-bg.webp');
-  background-size:cover;
-  background-position:center;
+  min-height: 100vh;
+}
+
+.app-main {
+  position: relative;
+  isolation: isolate;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
