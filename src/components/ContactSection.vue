@@ -76,7 +76,7 @@ const submitForm = () => {
   line-height: 0.95;
 }
 
-.contact-copy > p {
+.contact-copy>p {
   max-width: 30rem;
   margin: 0;
   color: var(--color-muted);

@@ -77,7 +77,7 @@ const t = inject('t')
   gap: clamp(2rem, 8vw, 8rem);
 }
 
-.editorial-row + .editorial-row {
+.editorial-row+.editorial-row {
   margin-top: clamp(5rem, 13vw, 12rem);
 }
 
@@ -137,6 +137,7 @@ const t = inject('t')
 }
 
 @media (max-width: 760px) {
+
   .editorial-row,
   .editorial-row-reverse {
     grid-template-columns: 1fr;

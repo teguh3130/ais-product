@@ -22,12 +22,7 @@ const features = [
     </div>
 
     <div class="feature-grid">
-      <FeatureCard
-        v-for="(feature, index) in features"
-        :key="feature.key"
-        :feature="feature"
-        :index="index"
-      />
+      <FeatureCard v-for="(feature, index) in features" :key="feature.key" :feature="feature" :index="index" />
     </div>
   </section>
 </template>

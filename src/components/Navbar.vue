@@ -56,12 +56,7 @@ onBeforeUnmount(() => {
     </a>
 
     <nav class="desktop-menu" aria-label="Main navigation">
-      <a
-        v-for="item in navigation"
-        :key="item.id"
-        :href="`#${item.id}`"
-        :class="{ active: activeSection === item.id }"
-      >
+      <a v-for="item in navigation" :key="item.id" :href="`#${item.id}`" :class="{ active: activeSection === item.id }">
         {{ item.label }}
       </a>
     </nav>
@@ -76,13 +71,8 @@ onBeforeUnmount(() => {
         </button>
       </div>
 
-      <button
-        class="menu-button"
-        type="button"
-        :aria-expanded="menuOpen"
-        aria-label="Toggle navigation menu"
-        @click="toggleMenu"
-      >
+      <button class="menu-button" type="button" :aria-expanded="menuOpen" aria-label="Toggle navigation menu"
+        @click="toggleMenu">
         <span></span>
         <span></span>
       </button>
@@ -92,13 +82,8 @@ onBeforeUnmount(() => {
   <Transition name="mobile-menu">
     <div v-if="menuOpen" class="mobile-navigation">
       <nav aria-label="Mobile navigation">
-        <a
-          v-for="item in navigation"
-          :key="item.id"
-          :href="`#${item.id}`"
-          :class="{ active: activeSection === item.id }"
-          @click="closeMenu"
-        >
+        <a v-for="item in navigation" :key="item.id" :href="`#${item.id}`"
+          :class="{ active: activeSection === item.id }" @click="closeMenu">
           {{ item.label }}
         </a>
       </nav>

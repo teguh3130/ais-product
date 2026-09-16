@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
   line-height: 1;
 }
 
-.workflow-intro > p {
+.workflow-intro>p {
   max-width: 30rem;
   margin: 0;
   color: var(--color-muted);

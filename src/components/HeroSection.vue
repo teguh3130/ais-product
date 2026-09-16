@@ -35,12 +35,8 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <div
-        class="hero-visual"
-        :style="{ transform: `translate3d(0, ${scrollOffset}px, 0)` }"
-        data-aos="fade-left"
-        data-aos-delay="250"
-      >
+      <div class="hero-visual" :style="{ transform: `translate3d(0, ${scrollOffset}px, 0)` }" data-aos="fade-left"
+        data-aos-delay="250">
         <div class="visual-glow"></div>
         <img :src="shipImage" alt="Vessel monitored by AIS ITS" />
         <span class="visual-caption">REAL-TIME VESSEL VISIBILITY</span>
@@ -230,6 +226,7 @@ onBeforeUnmount(() => {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);

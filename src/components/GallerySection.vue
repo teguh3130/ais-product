@@ -42,16 +42,9 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
     </div>
 
     <div class="gallery-grid">
-      <button
-        v-for="(slide, index) in slides"
-        :key="slide.key"
-        class="gallery-item"
-        :class="`gallery-item-${index + 1}`"
-        type="button"
-        data-aos="fade-up"
-        :data-aos-delay="index * 100"
-        @click="openLightbox(slide)"
-      >
+      <button v-for="(slide, index) in slides" :key="slide.key" class="gallery-item"
+        :class="`gallery-item-${index + 1}`" type="button" data-aos="fade-up" :data-aos-delay="index * 100"
+        @click="openLightbox(slide)">
         <video v-if="slide.type === 'video'" :src="slide.file" muted loop autoplay playsinline></video>
         <img v-else :src="slide.file" :alt="t.gallery.judul[slide.key]" loading="lazy" />
         <span class="gallery-label">{{ t.gallery.judul[slide.key] }} <b aria-hidden="true">↗</b></span>
@@ -62,14 +55,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
       <div v-if="selectedSlide" class="lightbox" role="dialog" aria-modal="true" @click="closeLightbox">
         <div class="lightbox-panel" @click.stop>
           <button class="close-button" type="button" aria-label="Close gallery" @click="closeLightbox">×</button>
-          <video
-            v-if="selectedSlide.type === 'video'"
-            :src="selectedSlide.file"
-            controls
-            autoplay
-            muted
-            playsinline
-          ></video>
+          <video v-if="selectedSlide.type === 'video'" :src="selectedSlide.file" controls autoplay muted
+            playsinline></video>
           <img v-else :src="selectedSlide.file" :alt="t.gallery.judul[selectedSlide.key]" />
           <div class="lightbox-copy">
             <span class="eyebrow">AIS ITS / {{ String(selectedSlide.key).padStart(2, '0') }}</span>
@@ -223,7 +210,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
 }
 
 .lightbox-panel video,
-.lightbox-panel > img {
+.lightbox-panel>img {
   display: block;
   width: 100%;
   max-height: 70svh;
