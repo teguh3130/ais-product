@@ -192,7 +192,7 @@ onBeforeUnmount(() => {
 
 .workflow-visual img {
   width: 100%;
-  max-height: 34rem;
+  max-height: 38rem;
   object-fit: cover;
   object-position: center;
 }
