@@ -46,6 +46,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.modal-open {
+  overflow: none;
+}
+
 button,
 input,
 textarea,

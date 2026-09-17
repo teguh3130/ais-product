@@ -1,15 +1,15 @@
 <script setup>
-import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue'
-import demoVideo from '../assets/video/test.mp4'
+import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import ewsImage from '../assets/gambar/ews.png'
 import inspectionImage from '../assets/gambar/spesification.png'
 import movementImage from '../assets/gambar/trackmap.png'
 
 const t = inject('t')
 const selectedSlide = ref(null)
+let savedScrollPosition = 0
 
 const slides = computed(() => [
-  { key: 1, type: 'video', file: demoVideo },
+  { key: 1, type: 'video', file: 'https://www.youtube.com/embed/cgE5S2BUTdA?rel=0' },
   { key: 2, type: 'image', file: ewsImage },
   { key: 3, type: 'image', file: inspectionImage },
   { key: 4, type: 'image', file: movementImage },
@@ -23,12 +23,42 @@ const closeLightbox = () => {
   selectedSlide.value = null
 }
 
+watch(selectedSlide, (slide) => {
+  if (slide) {
+    savedScrollPosition = window.scrollY
+    document.body.classList.add('modal-open')
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${savedScrollPosition}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.width = '100%'
+    return
+  }
+
+  document.body.classList.remove('modal-open')
+  document.body.style.position = ''
+  document.body.style.top = ''
+  document.body.style.left = ''
+  document.body.style.right = ''
+  document.body.style.width = ''
+  window.scrollTo(0, savedScrollPosition)
+})
+
 const handleKeydown = (event) => {
   if (event.key === 'Escape') closeLightbox()
 }
 
 onMounted(() => window.addEventListener('keydown', handleKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeydown)
+  document.body.classList.remove('modal-open')
+  document.body.style.position = ''
+  document.body.style.top = ''
+  document.body.style.left = ''
+  document.body.style.right = ''
+  document.body.style.width = ''
+  window.scrollTo(0, savedScrollPosition)
+})
 </script>
 
 <template>
@@ -45,27 +75,36 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
       <button v-for="(slide, index) in slides" :key="slide.key" class="gallery-item"
         :class="`gallery-item-${index + 1}`" type="button" data-aos="fade-up" :data-aos-delay="index * 100"
         @click="openLightbox(slide)">
-        <video v-if="slide.type === 'video'" :src="slide.file" muted loop autoplay playsinline></video>
-        <img v-else :src="slide.file" :alt="t.gallery.judul[slide.key]" loading="lazy" />
-        <span class="gallery-label">{{ t.gallery.judul[slide.key] }} <b aria-hidden="true">↗</b></span>
+        <iframe v-if="slide.type === 'video'" :src="slide.file" :title="t.gallery[`item${slide.key}`].title"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        <img v-else :src="slide.file" :alt="t.gallery[`item${slide.key}`].title" loading="lazy" />
+        <span class="gallery-label">{{ t.gallery[`item${slide.key}`].title }} <b aria-hidden="true">↗</b></span>
       </button>
     </div>
 
-    <Transition name="lightbox">
-      <div v-if="selectedSlide" class="lightbox" role="dialog" aria-modal="true" @click="closeLightbox">
-        <div class="lightbox-panel" @click.stop>
-          <button class="close-button" type="button" aria-label="Close gallery" @click="closeLightbox">×</button>
-          <video v-if="selectedSlide.type === 'video'" :src="selectedSlide.file" controls autoplay muted
-            playsinline></video>
-          <img v-else :src="selectedSlide.file" :alt="t.gallery.judul[selectedSlide.key]" />
-          <div class="lightbox-copy">
-            <span class="eyebrow">AIS ITS / {{ String(selectedSlide.key).padStart(2, '0') }}</span>
-            <h3>{{ t.gallery.judul[selectedSlide.key] }}</h3>
-            <p>{{ t.gallery.deskripsi[selectedSlide.key] }}</p>
+    <Teleport to="body">
+      <Transition name="lightbox">
+        <div v-if="selectedSlide" class="lightbox" role="dialog" aria-modal="true" @click="closeLightbox">
+          <div class="gallery-modal" @click.stop>
+            <button class="gallery-close" type="button" aria-label="Close gallery" @click="closeLightbox">×</button>
+            <div class="gallery-media">
+              <iframe v-if="selectedSlide.type === 'video'" :src="selectedSlide.file"
+                :title="t.gallery[`item${selectedSlide.key}`].title"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+              <img v-else :src="selectedSlide.file" :alt="t.gallery[`item${selectedSlide.key}`].title" />
+            </div>
+            <div class="gallery-info">
+              <span class="eyebrow">{{ t.gallery[`item${selectedSlide.key}`].label }}</span>
+              <h3>{{ t.gallery[`item${selectedSlide.key}`].title }}</h3>
+              <p>{{ t.gallery[`item${selectedSlide.key}`].description }}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </Transition>
+      </Transition>
+    </Teleport>
   </section>
 </template>
 
@@ -143,7 +182,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
   min-height: 24rem;
 }
 
-.gallery-item video,
+.gallery-item iframe,
 .gallery-item img {
   width: 100%;
   height: 100%;
@@ -158,7 +197,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
   background: #eef3ff;
 }
 
-.gallery-item:hover video,
+.gallery-item:hover iframe,
 .gallery-item:hover img {
   filter: brightness(0.78);
   transform: scale(1.045);
@@ -189,73 +228,129 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
 
 .lightbox {
   position: fixed;
-  margin-top: 80px;
-  z-index: 2000;
+  z-index: 9999;
   inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-  background: rgba(17, 17, 17, 0.72);
-  backdrop-filter: blur(18px);
-}
-
-.lightbox-panel {
-  position: relative;
-  width: min(100%, 68rem);
-  max-height: 94svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  padding-top: max(32px, env(safe-area-inset-top));
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
+  box-sizing: border-box;
   overflow: auto;
-  border-radius: var(--radius-card);
-  background: var(--color-surface);
-  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.24);
+  background: rgba(10, 12, 20, 0.55);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 
-.lightbox-panel video,
-.lightbox-panel>img {
+.gallery-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1200px, 95vw);
+  height: min(92vh, 900px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.28);
+}
+
+.gallery-media {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #111;
+}
+
+.gallery-media img,
+.gallery-media iframe {
   display: block;
   width: 100%;
-  max-height: 70svh;
+  height: 100%;
+  border: 0;
   object-fit: contain;
   background: #111;
 }
 
-.lightbox-copy {
-  padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem) 2rem;
+.gallery-info {
+  flex: 0 0 170px;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 28px 32px;
+  background: var(--color-surface);
+  scrollbar-color: rgba(17, 24, 39, 0.28) transparent;
+  scrollbar-width: thin;
 }
 
-.lightbox-copy h3 {
+.gallery-info::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gallery-info::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gallery-info::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: rgba(17, 24, 39, 0.28);
+}
+
+.gallery-info h3 {
   margin: 0.8rem 0 0.35rem;
   color: var(--color-text);
   font-size: 1.5rem;
 }
 
-.lightbox-copy p {
+.gallery-info p {
   margin: 0;
   color: var(--color-muted);
 }
 
-.close-button {
+.gallery-close {
   position: absolute;
-  z-index: 1;
-  top: 1rem;
-  right: 1rem;
+  z-index: 10;
+  top: 16px;
+  right: 16px;
   width: 2.75rem;
   height: 2.75rem;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 50%;
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   font-size: 1.7rem;
   line-height: 1;
+  transition: transform 220ms cubic-bezier(.22, 1, .36, 1), background 220ms ease;
+}
+
+.gallery-close:hover {
+  background: rgba(255, 255, 255, 0.92);
+  transform: scale(1.08) rotate(90deg);
+}
+
+.gallery-close:active {
+  transform: scale(0.95);
 }
 
 .lightbox-enter-active,
 .lightbox-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 280ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.lightbox-enter-active .gallery-modal,
+.lightbox-leave-active .gallery-modal {
+  transition: transform 280ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .lightbox-enter-from,
 .lightbox-leave-to {
   opacity: 0;
+}
+
+.lightbox-enter-from .gallery-modal,
+.lightbox-leave-to .gallery-modal {
+  transform: scale(0.96);
 }
 
 @media (max-width: 760px) {
@@ -272,6 +367,44 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
   .gallery-item-1,
   .gallery-item-3 {
     min-height: 17rem;
+  }
+
+  .lightbox {
+    padding: 16px;
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  .gallery-modal {
+    width: 100%;
+    height: min(92vh, 900px);
+    border-radius: 20px;
+  }
+
+  .gallery-info {
+    flex-basis: 200px;
+    padding: 24px 20px;
+  }
+
+  .gallery-media iframe {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 100%;
+  }
+
+  .gallery-close {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .gallery-modal {
+    border-radius: 24px;
+  }
+
+  .gallery-info {
+    flex-basis: 180px;
   }
 }
 </style>

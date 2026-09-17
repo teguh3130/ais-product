@@ -9,7 +9,7 @@ export const translations = {
             4: "Galeri",
             5: "Fitur",
             6: "Kontak",
-            test:{
+            test: {
                 1: "Home",
                 2: "Tentang",
                 3: "Alur sistem",
@@ -28,7 +28,7 @@ export const translations = {
 
         about: {
             subtitle: "Tentang AISITS",
-            description:{
+            description: {
                 1: "AISITS adalah sistem identifikasi otomatis dan perangkat keselamatan maritim yang dikembangkan oleh ITS untuk mencegah kecelakaan di laut. Sistem ini memanfaatkan teknologi AIS untuk memantau pergerakan kapal secara real-time, memberikan informasi penting kepada pengguna, dan meningkatkan keselamatan pelayaran.",
                 2: "Fungsi Utama sistem ini adalah Menerima, menyimpan, dan memproses data AIS dari kapal dan platform lepas pantai (offshore platform) untuk mengamankan navigasi, melindungi pipa bawah laut (subsea pipeline), serta platform lepas pantai."
             }
@@ -92,6 +92,26 @@ export const translations = {
                 2: "Visualisasi AIS ITS",
                 3: "Lihat demonstrasi sistem AIS ITS beserta fitur utama yang dikembangkan.",
             },
+            item1: {
+                label: "AIS ITS / 01",
+                title: "Video Profil AISITS",
+                description: "Mengenal AISITS melalui video profil yang menampilkan solusi, teknologi, dan inovasi dalam sistem pemantauan serta identifikasi kapal."
+            },
+            item2: {
+                label: "AIS ITS / 02",
+                title: "Early Warning System (EWS)",
+                description: "Sistem peringatan dini yang memantau aktivitas kapal secara real-time untuk mendeteksi potensi risiko, meningkatkan keselamatan pelayaran, dan mendukung pengambilan keputusan."
+            },
+            item3: {
+                label: "AIS ITS / 03",
+                title: "Ship Inspection",
+                description: "Fitur inspeksi kapal yang menyediakan informasi detail mengenai identitas, spesifikasi, status operasional, serta kondisi kapal sebagai pendukung proses monitoring."
+            },
+            item4: {
+                label: "AIS ITS / 04",
+                title: "Ship Tracking",
+                description: "Fitur pelacakan kapal secara real-time yang menampilkan posisi, rute perjalanan, dan pergerakan kapal untuk meningkatkan pemantauan operasional maritim."
+            },
             judul: {
                 1: "video test",
                 2: "img test",
@@ -106,7 +126,7 @@ export const translations = {
             }
         },
         contact: {
-            header:{
+            header: {
                 1: "Hubungi Kami",
                 2: "Kontak AIS ITS",
                 3: "Hubungi tim AIS ITS untuk informasi produk, kerja sama penelitian, maupun konsultasi mengenai teknologi pemantauan kapal."
@@ -127,7 +147,7 @@ export const translations = {
         nav: {
             1: "Home",
             2: "About",
-            3:"Workflow",
+            3: "Workflow",
             4: "Gallery",
             5: "Features",
             6: "Contact"
@@ -142,7 +162,7 @@ export const translations = {
 
         about: {
             subtitle: "About AISITS",
-            description:{
+            description: {
                 1: "AISITS is an automatic identification system and maritime safety device developed by ITS to prevent accidents at sea. This system utilizes AIS technology to monitor vessel movements in real-time, provide important information to users, and enhance maritime safety.",
                 2: "The main function of this system is to receive, store, and process AIS data from vessels and offshore platforms to ensure navigation safety, protect subsea pipelines, and support offshore platforms."
             }
@@ -207,6 +227,26 @@ export const translations = {
                 2: "AIS ITS Visualization",
                 3: "View the AIS ITS system demonstration along with its main features."
             },
+            item1: {
+                label: "AIS ITS / 01",
+                title: "AISITS Profile Video",
+                description: "Discover AISITS through a profile video showcasing its solutions, technologies, and innovations in vessel monitoring and identification systems."
+            },
+            item2: {
+                label: "AIS ITS / 02",
+                title: "Early Warning System (EWS)",
+                description: "A real-time early warning system that monitors vessel activities to detect potential risks, improve maritime safety, and support operational decision-making."
+            },
+            item3: {
+                label: "AIS ITS / 03",
+                title: "Ship Inspection",
+                description: "A vessel inspection feature that provides detailed information about ship identity, specifications, operational status, and condition for comprehensive monitoring."
+            },
+            item4: {
+                label: "AIS ITS / 04",
+                title: "Ship Tracking",
+                description: "A real-time vessel tracking feature that displays ship positions, travel routes, and movement history for enhanced maritime operational monitoring."
+            },
             judul: {
                 1: "video test",
                 2: "img test",
@@ -222,7 +262,7 @@ export const translations = {
         },
 
         contact: {
-            header:{
+            header: {
                 1: "Contact Us",
                 2: "Contact AIS ITS",
                 3: "Reach out to the AIS ITS team for product information, research collaboration, or consultation regarding vessel monitoring technology."

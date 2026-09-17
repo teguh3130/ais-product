@@ -62,7 +62,7 @@ onBeforeUnmount(() => {
     </nav>
 
     <div class="nav-actions">
-      <div class="lang-switch" aria-label="Language selector">
+      <div class="lang-switch" :class="{ 'lang-switch-en': language === 'en' }" aria-label="Language selector">
         <button :class="{ active: language === 'id' }" type="button" @click="language === 'en' && toggleLanguage()">
           ID
         </button>
@@ -142,7 +142,7 @@ onBeforeUnmount(() => {
   position: relative;
   color: var(--color-muted);
   font-size: 0.9925rem;
-  font-weight: 800;
+  font-weight: bold;
   text-decoration: none;
   transition: color 0.25s ease;
 }
@@ -177,30 +177,59 @@ onBeforeUnmount(() => {
 }
 
 .lang-switch {
+  position: relative;
   display: flex;
   gap: 0.125rem;
-  padding: 0.2rem;
+  min-height: 38px;
+  padding: 0.25rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(148, 163, 184, 0.16);
+  box-shadow: inset 0 1px 2px rgba(17, 24, 39, 0.04);
+  isolation: isolate;
+}
+
+.lang-switch::before {
+  position: absolute;
+  z-index: -1;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  width: 3rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  box-shadow: 0 3px 10px rgba(17, 24, 39, 0.12);
+  content: '';
+  transform: translateX(0);
+  transition: transform 250ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.lang-switch.lang-switch-en::before {
+  transform: translateX(3.125rem);
 }
 
 .lang-switch button {
-  min-width: 2rem;
+  position: relative;
+  z-index: 1;
+  min-width: 3rem;
   padding: 0.3rem 0.45rem;
   border: 0;
   border-radius: var(--radius-pill);
   color: var(--color-muted);
   background: transparent;
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 900;
   letter-spacing: 0.04em;
+  transition: color 250ms ease, transform 250ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .lang-switch button.active {
   color: var(--color-text);
-  background: var(--color-surface);
-  box-shadow: 0 2px 8px rgba(17, 17, 17, 0.08);
+  transform: scale(1.04);
+}
+
+.lang-switch button:not(.active):hover {
+  color: var(--color-text);
 }
 
 .menu-button {
@@ -278,7 +307,21 @@ onBeforeUnmount(() => {
   }
 
   .lang-switch {
-    display: none;
+    min-height: 34px;
+  }
+
+  .lang-switch::before {
+    width: 2.65rem;
+  }
+
+  .lang-switch.lang-switch-en::before {
+    transform: translateX(2.775rem);
+  }
+
+  .lang-switch button {
+    min-width: 2.65rem;
+    padding: 0.25rem 0.35rem;
+    font-size: 0.85rem;
   }
 }
 </style>
