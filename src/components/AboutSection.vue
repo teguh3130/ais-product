@@ -1,7 +1,7 @@
 <script setup>
 import { inject } from 'vue'
 import overviewImage from '../assets/gambar/1.png'
-import shipImage from '../assets/gambar/safety.jpeg'
+import shipImage from '../assets/gambar/safety.png'
 
 const t = inject('t')
 </script>
