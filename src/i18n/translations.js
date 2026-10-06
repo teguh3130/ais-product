@@ -1,281 +1,388 @@
-import img1 from "../assets/gambar/1.png"
-import img2 from "../assets/gambar/2.png"
 export const translations = {
-    id: {
-        nav: {
-            1: "Home",
-            2: "Tentang",
-            3: "Alur sistem",
-            4: "Galeri",
-            5: "Fitur",
-            6: "Kontak",
-            test: {
-                1: "Home",
-                2: "Tentang",
-                3: "Alur sistem",
-                4: "Galeri",
-                5: "Fitur",
-                6: "Kontak",
-            }
-        },
-
-        hero: {
-            title: "Automatic Identification System ITS",
-            subtitle:
-                "Solusi teknologi maritim untuk pemantauan kapal secara real-time.",
-            button: "Pelajari Fitur"
-        },
-
-        about: {
-            subtitle: "Tentang AISITS",
-            description: {
-                1: "AISITS adalah sistem identifikasi otomatis dan perangkat keselamatan maritim yang dikembangkan oleh ITS untuk mencegah kecelakaan di laut. Sistem ini memanfaatkan teknologi AIS untuk memantau pergerakan kapal secara real-time, memberikan informasi penting kepada pengguna, dan meningkatkan keselamatan pelayaran.",
-                2: "Fungsi Utama sistem ini adalah Menerima, menyimpan, dan memproses data AIS dari kapal dan platform lepas pantai (offshore platform) untuk mengamankan navigasi, melindungi pipa bawah laut (subsea pipeline), serta platform lepas pantai."
-            }
-        },
-
-        fitur: {
-            header: "Fitur Utama",
-            title: {
-                1: "Sistem Peringatan Dini (Early Warning System)",
-                2: "Sistem Inspeksi Kapal (Ship Inspection System)",
-                3: "Perekaman Pergerakan Kapal (Ship Movement Recording)"
-            },
-            description: {
-                1: "Sistem peringatan dini untuk memberi tahu kapal jika mendekati area berbahaya, pipa bawah laut, platform lepas pantai, atau saat penurunan jangkar.",
-                2: "Membantu pihak Syahbandar / Otoritas Pelabuhan (Port Authority) dalam menilai tingkat risiko kapal sebelum atau sesudah memasuki pelabuhan.",
-                3: "Mengumpulkan data AIS dari berbagai sumber (AISHUB, IPSWITCH, LAPAN) untuk menyimpan riwayat pergerakan kapal (historical data)."
-            }
-        },
-
-        workflow: {
-            subtitle: "Alur Sistem",
-            title: "Bagaimana AIS ITS Bekerja?",
-            img: img1,
-            description:
-                "Automatic Identification System (AIS) bekerja dengan mengirimkan data kapal secara otomatis. AIS ITS kemudian menerima, memproses, dan menyajikan informasi tersebut agar mudah dipantau oleh pengguna.",
-
-            steps: [
-                {
-                    number: "01",
-                    icon: "🚢",
-                    title: "Kapal Mengirim Data",
-                    description:
-                        "Transponder AIS di kapal mengirimkan informasi seperti posisi, kecepatan, arah, dan identitas kapal."
-                },
-                {
-                    number: "02",
-                    icon: "📡",
-                    title: "Sinyal Diterima",
-                    description:
-                        "Data AIS diterima oleh stasiun pantai maupun satelit yang menangkap sinyal dari kapal."
-                },
-                {
-                    number: "03",
-                    icon: "☁️",
-                    title: "Data Diproses",
-                    description:
-                        "Server AIS ITS mengolah data yang diterima untuk analisis, penyimpanan, dan pemantauan."
-                },
-                {
-                    number: "04",
-                    icon: "💻",
-                    title: "Informasi Ditampilkan",
-                    description:
-                        "Pengguna dapat melihat posisi kapal, riwayat perjalanan, dan informasi penting lainnya melalui sistem."
-                }
-            ]
-        },
-        gallery: {
-            header: {
-                1: "Galeri",
-                2: "Visualisasi AIS ITS",
-                3: "Lihat demonstrasi sistem AIS ITS beserta fitur utama yang dikembangkan.",
-            },
-            item1: {
-                label: "AIS ITS / 01",
-                title: "Video Profil AISITS",
-                description: "Mengenal AISITS melalui video profil yang menampilkan solusi, teknologi, dan inovasi dalam sistem pemantauan serta identifikasi kapal."
-            },
-            item2: {
-                label: "AIS ITS / 02",
-                title: "Early Warning System (EWS)",
-                description: "Sistem peringatan dini yang memantau aktivitas kapal secara real-time untuk mendeteksi potensi risiko, meningkatkan keselamatan pelayaran, dan mendukung pengambilan keputusan."
-            },
-            item3: {
-                label: "AIS ITS / 03",
-                title: "Ship Inspection",
-                description: "Fitur inspeksi kapal yang menyediakan informasi detail mengenai identitas, spesifikasi, status operasional, serta kondisi kapal sebagai pendukung proses monitoring."
-            },
-            item4: {
-                label: "AIS ITS / 04",
-                title: "Ship Tracking",
-                description: "Fitur pelacakan kapal secara real-time yang menampilkan posisi, rute perjalanan, dan pergerakan kapal untuk meningkatkan pemantauan operasional maritim."
-            },
-            judul: {
-                1: "video test",
-                2: "img test",
-                3: "img test",
-                4: "img test"
-            },
-            deskripsi: {
-                1: "Demonstrasi sistem AIS ITS",
-                2: "Tampilan sistem AIS ITS",
-                3: "Tampilan sistem AIS ITS",
-                4: "Tampilan sistem AIS ITS"
-            }
-        },
-        contact: {
-            header: {
-                1: "Hubungi Kami",
-                2: "Kontak AIS ITS",
-                3: "Hubungi tim AIS ITS untuk informasi produk, kerja sama penelitian, maupun konsultasi mengenai teknologi pemantauan kapal."
-            },
-            form: {
-                name: "Nama",
-                email: "Email",
-                message: "Tulis Pesan...",
-                submit: "Kirim Pesan"
-            }
-        },
-        footer: {
-            deskripsi: "Solusi teknologi maritim berbasis Automatic Identification System untuk monitoring kapal, analisis data, dan penelitian maritim",
-        }
+  id: {
+    nav: {
+      1: 'Home',
+      2: 'Tentang',
+      3: 'Alur sistem',
+      5: 'Fitur',
+      6: 'Kontak',
     },
 
-    en: {
-        nav: {
-            1: "Home",
-            2: "About",
-            3: "Workflow",
-            4: "Gallery",
-            5: "Features",
-            6: "Contact"
-        },
+    hero: {
+      title: 'Automatic Identification System ITS',
+      subtitle:
+        'Platform pemantauan dan riset maritim yang dikembangkan di ITS untuk mengubah data kapal menjadi informasi yang dapat ditindaklanjuti demi operasi maritim yang lebih aman',
+      button: 'Lihat Cara Kerjanya',
+    },
 
-        hero: {
-            title: "ITS Automatic Identification System",
-            subtitle:
-                "Maritime technology solution for real-time vessel monitoring.",
-            button: "Explore Features"
-        },
+    vesselCard: {
+      ariaLabel: 'Contoh antarmuka informasi kapal, data ilustratif',
+      title: 'ANTARMUKA DATA AIS',
+      badge: 'ILUSTRATIF',
+      note: 'Contoh data kapal yang dapat dikelola AIS ITS',
+      fields: {
+        name: 'Nama Kapal',
+        mmsi: 'MMSI',
+        type: 'Jenis Kapal',
+        speed: 'Kecepatan',
+        course: 'Haluan',
+        heading: 'Arah',
+        destination: 'Tujuan',
+        status: 'Status Navigasi',
+      },
+    },
 
-        about: {
-            subtitle: "About AISITS",
-            description: {
-                1: "AISITS is an automatic identification system and maritime safety device developed by ITS to prevent accidents at sea. This system utilizes AIS technology to monitor vessel movements in real-time, provide important information to users, and enhance maritime safety.",
-                2: "The main function of this system is to receive, store, and process AIS data from vessels and offshore platforms to ensure navigation safety, protect subsea pipelines, and support offshore platforms."
-            }
+    about: {
+      subtitle: 'Tentang AISITS',
+      label: 'MENGAPA AIS ITS',
+      headline: 'Mengubah Data Maritim Menjadi Wawasan yang Bermakna',
+      imageLabel: 'PEMANTAUAN MARITIM',
+      cta: 'Lihat alur sistem',
+      visualAlt: 'Operasi maritim AIS ITS',
+      focus: {
+        label: 'FOKUS KAMI',
+        items: {
+          safety: {
+            title: 'Keselamatan Maritim',
+            description: 'Mendukung pemantauan kapal dan kewaspadaan dini terhadap risiko.',
+          },
+          research: {
+            title: 'Riset & Inovasi',
+            description: 'Memungkinkan analisis berbasis AIS dan riset maritim.',
+          },
+          collaboration: {
+            title: 'Kolaborasi',
+            description: 'Membuka peluang riset dan kolaborasi.',
+          },
         },
+      },
+      purpose: {
+        label: 'TUJUAN KAMI',
+        headline: 'Dari Data Maritim Menjadi',
+        headlineAccent: 'Wawasan yang Bermakna',
+      },
+      description: {
+        1: 'Lalu lintas maritim menghasilkan aliran informasi kapal secara terus-menerus. Mengubah informasi tersebut menjadi wawasan yang bermakna membantu pemantauan kapal, mengidentifikasi potensi risiko, dan memperkuat riset maritim',
+        2: 'AIS ITS adalah platform pemantauan dan riset maritim yang dikembangkan di Institut Teknologi Sepuluh Nopember (ITS), dirancang untuk mengumpulkan, mengolah, dan memvisualisasikan data AIS untuk keselamatan, analisis, dan riset maritim',
+      },
+    },
 
-        fitur: {
-            header: "Main Features",
-            title: {
-                1: "Early Warning System (EWS)",
-                2: "Ship Inspection System",
-                3: "Ship Movement Recording"
-            },
-            description: {
-                1: "An early warning system that alerts vessels when approaching hazardous areas, subsea pipelines, offshore platforms, or during anchor deployment.",
-                2: "Assists Port Authorities in assessing the risk level of vessels before or after entering the port.",
-                3: "Collects AIS data from various sources (AISHUB, IPSWITCH, LAPAN) to store historical vessel movement data."
-            }
+    fitur: {
+      label: 'KECERDASAN MARITIM',
+      headline: 'Lihat AIS ITS beraksi.',
+      support:
+        'Jelajahi sistem yang dikembangkan untuk mengubah data kapal menjadi informasi maritim yang praktis',
+      videoTitle: 'Video profil AIS ITS',
+      explore: 'JELAJAHI AIS ITS',
+      carouselLabel: 'Korsel fitur AIS ITS',
+      prev: 'Fitur sebelumnya',
+      next: 'Fitur berikutnya',
+      progressLabel: 'Progres fitur',
+      close: 'Tutup',
+      items: [
+        {
+          title: 'Pemantauan Kapal Real-Time',
+          description:
+            'Menampilkan posisi, rute, dan pergerakan kapal secara real-time pada peta AIS untuk pemantauan maritim yang berkelanjutan.',
+          points: [
+            'Posisi kapal secara real-time',
+            'Rute dan pergerakan kapal',
+            'Pemantauan berkelanjutan di peta AIS',
+          ],
         },
-
-        workflow: {
-            subtitle: "System Flow",
-            title: "How Does AIS ITS Work?",
-            img: img2,
-            description:
-                "The Automatic Identification System (AIS) automatically transmits vessel information. AIS ITS receives, processes, and presents the data for users.",
-
-            steps: [
-                {
-                    number: "01",
-                    icon: "🚢",
-                    title: "Vessel Sends Data",
-                    description:
-                        "The AIS transponder transmits the vessel's position, speed, course, and identity."
-                },
-                {
-                    number: "02",
-                    icon: "📡",
-                    title: "Signal is Received",
-                    description:
-                        "The AIS signal is received by coastal stations or satellites."
-                },
-                {
-                    number: "03",
-                    icon: "☁️",
-                    title: "Data is Processed",
-                    description:
-                        "AIS ITS servers process, analyze, and store the received data."
-                },
-                {
-                    number: "04",
-                    icon: "💻",
-                    title: "Information is Displayed",
-                    description:
-                        "Users can monitor vessel positions, routes, and other important information."
-                }
-            ]
+        {
+          title: 'Sistem Peringatan Dini (EWS)',
+          description:
+            'Memberi tahu kapal yang mendekati area berbahaya, pipa bawah laut, platform lepas pantai, atau saat penurunan jangkar.',
+          points: [
+            'Peringatan area berbahaya',
+            'Kedekatan pipa bawah laut dan platform lepas pantai',
+            'Peringatan saat penurunan jangkar',
+          ],
         },
-
-        gallery: {
-            header: {
-                1: "Gallery",
-                2: "AIS ITS Visualization",
-                3: "View the AIS ITS system demonstration along with its main features."
-            },
-            item1: {
-                label: "AIS ITS / 01",
-                title: "AISITS Profile Video",
-                description: "Discover AISITS through a profile video showcasing its solutions, technologies, and innovations in vessel monitoring and identification systems."
-            },
-            item2: {
-                label: "AIS ITS / 02",
-                title: "Early Warning System (EWS)",
-                description: "A real-time early warning system that monitors vessel activities to detect potential risks, improve maritime safety, and support operational decision-making."
-            },
-            item3: {
-                label: "AIS ITS / 03",
-                title: "Ship Inspection",
-                description: "A vessel inspection feature that provides detailed information about ship identity, specifications, operational status, and condition for comprehensive monitoring."
-            },
-            item4: {
-                label: "AIS ITS / 04",
-                title: "Ship Tracking",
-                description: "A real-time vessel tracking feature that displays ship positions, travel routes, and movement history for enhanced maritime operational monitoring."
-            },
-            judul: {
-                1: "video test",
-                2: "img test",
-                3: "img test",
-                4: "img test"
-            },
-            deskripsi: {
-                1: "Demo system AIS ITS",
-                2: "AIS ITS Interface",
-                3: "AIS ITS Interface",
-                4: "AIS ITS Interface"
-            }
+        {
+          title: 'Geofencing Maritim',
+          description:
+            'Membuat batas virtual di perairan yang dipantau dan menandai kapal yang masuk atau keluar dari zona tertentu.',
+          points: [
+            'Batas virtual di perairan yang dipantau',
+            'Menandai kapal yang masuk atau keluar zona',
+          ],
         },
-
-        contact: {
-            header: {
-                1: "Contact Us",
-                2: "Contact AIS ITS",
-                3: "Reach out to the AIS ITS team for product information, research collaboration, or consultation regarding vessel monitoring technology."
-            },
-            form: {
-                name: "Name",
-                email: "Email",
-                message: "Write a Message...",
-                submit: "Send Message"
-            }
+        {
+          title: 'Pelacakan Kapal',
+          description:
+            'Mengumpulkan data AIS dari sumber seperti AISHUB, IPSWITCH, dan LAPAN untuk menyimpan riwayat pergerakan kapal.',
+          points: [
+            'Data AIS dari AISHUB, IPSWITCH, dan LAPAN',
+            'Riwayat pergerakan kapal tersimpan',
+          ],
         },
-        footer: {
-            deskripsi: "Maritime technology solution based on the Automatic Identification System for vessel monitoring, data analysis, and maritime research."
-        }
-    }
+        {
+          title: 'Heatmap Kepadatan Kapal',
+          description:
+            'Memvisualisasikan kepadatan kapal di perairan yang dipantau untuk menunjukkan pola lalu lintas dan alur pelayaran yang padat.',
+          points: ['Visualisasi kepadatan kapal', 'Pola lalu lintas dan alur pelayaran padat'],
+        },
+        {
+          title: 'Pemantauan Kecepatan Kapal',
+          description:
+            'Memantau kecepatan dan riwayat kecepatan kapal untuk membantu menandai kapal yang bergerak di luar batas aman atau wajar.',
+          points: [
+            'Pemantauan kecepatan kapal',
+            'Riwayat kecepatan kapal',
+            'Menandai kecepatan di luar batas wajar',
+          ],
+        },
+        {
+          title: 'Intelijen Cuaca Maritim',
+          description:
+            'Menampilkan kondisi cuaca maritim seperti angin dan gelombang pada tampilan pemantauan untuk mendukung keputusan pelayaran yang lebih aman.',
+          points: [
+            'Informasi angin dan gelombang',
+            'Terintegrasi pada tampilan pemantauan',
+            'Mendukung keputusan pelayaran yang lebih aman',
+          ],
+        },
+      ],
+    },
+
+    workflow: {
+      subtitle: 'Alur Sistem',
+      label: 'DARI SINYAL MENJADI WAWASAN',
+      title: 'Bagaimana AIS ITS mengubah data kapal menjadi informasi maritim.',
+      support: 'Dari sinyal kapal menjadi informasi maritim yang dapat ditindaklanjuti.',
+
+      steps: [
+        {
+          number: '01',
+          title: 'Data Kapal',
+          description:
+            'Transponder AIS di kapal mengirimkan informasi seperti posisi, kecepatan, arah, dan identitas kapal.',
+        },
+        {
+          number: '02',
+          title: 'Data Diterima',
+          description:
+            'Data AIS diterima oleh stasiun pantai maupun satelit yang menangkap sinyal dari kapal.',
+        },
+        {
+          number: '03',
+          title: 'Data Diolah',
+          description:
+            'Server AIS ITS mengolah data yang diterima untuk analisis, penyimpanan, dan pemantauan.',
+        },
+        {
+          number: '04',
+          title: 'Informasi Maritim',
+          description:
+            'Pengguna dapat melihat posisi kapal, riwayat perjalanan, dan informasi penting lainnya melalui sistem.',
+        },
+      ],
+    },
+    contact: {
+      label: 'MARI TERHUBUNG',
+      headline: 'Punya pertanyaan tentang AIS ITS?',
+      support:
+        'Baik Anda tertarik pada riset AIS, pemantauan kapal, kolaborasi, maupun ingin mengetahui lebih lanjut tentang sistem ini, kami akan senang mendengar dari Anda.',
+      location: 'Kampus ITS, Surabaya',
+      emailCta: 'Kirim Email ke AIS ITS',
+    },
+    footer: {
+      explore: 'JELAJAHI',
+      contact: 'KONTAK',
+      backToTop: 'Kembali ke atas',
+      deskripsi:
+        'Solusi teknologi maritim berbasis Automatic Identification System untuk monitoring kapal, analisis data, dan penelitian maritim',
+    },
+  },
+
+  en: {
+    nav: {
+      1: 'Home',
+      2: 'About',
+      3: 'Workflow',
+      5: 'Features',
+      6: 'Contact',
+    },
+
+    hero: {
+      title: 'ITS Automatic Identification System',
+      subtitle:
+        'A maritime monitoring and research platform developed at ITS to transform vessel data into actionable information for safer maritime operations',
+      button: 'See How It Works',
+    },
+
+    vesselCard: {
+      ariaLabel: 'Example vessel information interface, illustrative data',
+      title: 'AIS DATA INTERFACE',
+      badge: 'ILLUSTRATIVE',
+      note: 'Example of the vessel data AIS ITS can work with.',
+      fields: {
+        name: 'Vessel Name',
+        mmsi: 'MMSI',
+        type: 'Vessel Type',
+        speed: 'Speed',
+        course: 'Course',
+        heading: 'Heading',
+        destination: 'Destination',
+        status: 'Navigation Status',
+      },
+    },
+
+    about: {
+      subtitle: 'About AISITS',
+      label: 'WHY AIS ITS',
+      headline: 'Turning Maritime Data Into Meaningful Insight',
+      imageLabel: 'MARITIME MONITORING',
+      cta: 'See the system flow',
+      visualAlt: 'AIS ITS maritime operations',
+      focus: {
+        label: 'OUR FOCUS',
+        items: {
+          safety: {
+            title: 'Maritime Safety',
+            description: 'Supporting vessel monitoring and early risk awareness.',
+          },
+          research: {
+            title: 'Research & Innovation',
+            description: 'Enabling AIS-based analysis and maritime research.',
+          },
+          collaboration: {
+            title: 'Collaboration',
+            description: 'Creating opportunities for research and collaboration.',
+          },
+        },
+      },
+      purpose: {
+        label: 'OUR PURPOSE',
+        headline: 'From Maritime Data to',
+        headlineAccent: 'Meaningful Insights',
+      },
+      description: {
+        1: 'Maritime traffic generates continuous streams of vessel information. Turning that information into meaningful insight helps support vessel monitoring, identify potential risks, and strengthen maritime research.',
+        2: 'AIS ITS is a maritime monitoring and research platform developed at Institut Teknologi Sepuluh Nopember (ITS), designed to collect, process, and visualize AIS data for maritime safety, analysis, and research.',
+      },
+    },
+
+    fitur: {
+      label: 'MARITIME INTELLIGENCE',
+      headline: 'See AIS ITS in action.',
+      support:
+        'Explore the systems developed to turn vessel data into practical maritime information.',
+      videoTitle: 'AIS ITS profile video',
+      explore: 'EXPLORE AIS ITS',
+      carouselLabel: 'AIS ITS feature carousel',
+      prev: 'Previous feature',
+      next: 'Next feature',
+      progressLabel: 'Feature progress',
+      close: 'Close',
+      items: [
+        {
+          title: 'Real-Time Vessel Monitoring',
+          description:
+            'Displays live vessel positions, routes, and movement on the AIS map for continuous maritime monitoring.',
+          points: [
+            'Live vessel positions',
+            'Routes and vessel movement',
+            'Continuous monitoring on the AIS map',
+          ],
+        },
+        {
+          title: 'Early Warning System',
+          description:
+            'Alerts vessels approaching hazardous areas, subsea pipelines, offshore platforms, or during anchor deployment.',
+          points: [
+            'Hazard area alerts',
+            'Subsea pipeline and offshore platform proximity',
+            'Anchor deployment alerts',
+          ],
+        },
+        {
+          title: 'Maritime Geofencing',
+          description:
+            'Creates virtual boundaries around monitored waters and flags vessels that enter or leave a designated zone.',
+          points: [
+            'Virtual boundaries around monitored waters',
+            'Flags vessels entering or leaving a zone',
+          ],
+        },
+        {
+          title: 'Vessel Tracking',
+          description:
+            'Collects AIS data from sources such as AISHUB, IPSWITCH, and LAPAN to store historical vessel movement.',
+          points: [
+            'AIS data from AISHUB, IPSWITCH, and LAPAN',
+            'Stored historical vessel movement',
+          ],
+        },
+        {
+          title: 'Vessel Density Heatmap',
+          description:
+            'Visualizes vessel density across monitored waters to reveal traffic patterns and busy shipping lanes over time.',
+          points: ['Vessel density visualization', 'Traffic patterns and busy shipping lanes'],
+        },
+        {
+          title: 'Speed Monitoring',
+          description:
+            'Tracks vessel speed and speed history to help flag vessels moving outside safe or expected limits.',
+          points: ['Vessel speed tracking', 'Speed history', 'Flags speeds outside safe limits'],
+        },
+        {
+          title: 'Maritime Weather Intelligence',
+          description:
+            'Overlays maritime weather conditions such as wind and waves onto the monitoring view to support safer voyage decisions.',
+          points: [
+            'Wind and wave conditions',
+            'Overlaid on the monitoring view',
+            'Supports safer voyage decisions',
+          ],
+        },
+      ],
+    },
+
+    workflow: {
+      subtitle: 'System Flow',
+      label: 'FROM SIGNAL TO INSIGHT',
+      title: 'How AIS ITS turns vessel data into maritime information.',
+      support: 'From vessel signals to actionable maritime information.',
+
+      steps: [
+        {
+          title: 'Vessel Data',
+          description:
+            "The AIS transponder transmits the vessel's position, speed, course, and identity.",
+        },
+        {
+          title: 'Data Received',
+          description: 'The AIS signal is received by coastal stations or satellites.',
+        },
+        {
+          title: 'Data Processed',
+          description: 'AIS ITS servers process, analyze, and store the received data.',
+        },
+        {
+          title: 'Maritime Information',
+          description:
+            'Users can monitor vessel positions, routes, and other important information.',
+        },
+      ],
+    },
+
+    contact: {
+      label: "LET'S CONNECT",
+      headline: 'Have a question about AIS ITS?',
+      support:
+        "Whether you're interested in AIS research, vessel monitoring, collaboration, or learning more about the system, we'd be glad to hear from you.",
+      location: 'Kampus ITS, Surabaya',
+      emailCta: 'Email AIS ITS',
+    },
+    footer: {
+      explore: 'EXPLORE',
+      contact: 'CONTACT',
+      backToTop: 'Back to top',
+      deskripsi:
+        'Maritime technology solution based on the Automatic Identification System for vessel monitoring, data analysis, and maritime research.',
+    },
+  },
 }

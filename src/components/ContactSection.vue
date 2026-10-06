@@ -1,178 +1,177 @@
 <script setup>
-import { inject, ref } from 'vue'
+import { inject } from 'vue'
 
 const t = inject('t')
-const form = ref({ name: '', email: '', message: '' })
-
-const submitForm = () => {
-  alert(`Terima kasih, ${form.value.name}! Pesan berhasil dikirim.`)
-  form.value = { name: '', email: '', message: '' }
-}
+const contactEmail = 'aisits@its.ac.id'
+const mailtoHref = `mailto:${contactEmail}`
 </script>
 
 <template>
   <section id="contact" class="contact">
     <div class="contact-inner">
+      <!-- LEFT: statement -->
       <div class="contact-copy" data-aos="fade-up">
-        <span class="eyebrow">LET'S CONNECT</span>
-        <h2>{{ t.contact.header[2] }}</h2>
-        <p>{{ t.contact.header[3] }}</p>
-        <div class="contact-details">
-          <a href="mailto:aisits@its.ac.id">aisits@its.ac.id</a>
-          <span>Kampus ITS, Surabaya</span>
-        </div>
+        <h2>{{ t.contact.headline }}</h2>
+        <p>{{ t.contact.support }}</p>
       </div>
 
-      <form class="contact-form" data-aos="fade-up" data-aos-delay="150" @submit.prevent="submitForm">
-        <label>
-          <span>{{ t.contact.form.name }}</span>
-          <input v-model="form.name" type="text" autocomplete="name" required />
-        </label>
-        <label>
-          <span>{{ t.contact.form.email }}</span>
-          <input v-model="form.email" type="email" autocomplete="email" required />
-        </label>
-        <label>
-          <span>{{ t.contact.form.message }}</span>
-          <textarea v-model="form.message" rows="4" required></textarea>
-        </label>
-        <button class="submit-button" type="submit">
-          {{ t.contact.form.submit }} <span aria-hidden="true">↗</span>
-        </button>
-      </form>
+      <!-- RIGHT: direct contact, no form -->
+      <div class="contact-direct" data-aos="fade-up" data-aos-delay="100">
+        <div class="contact-details">
+          <a class="contact-email" :href="mailtoHref">{{ contactEmail }}</a>
+          <span class="contact-location">{{ t.contact.location }}</span>
+        </div>
+
+        <a class="contact-cta" :href="mailtoHref">
+          {{ t.contact.emailCta }}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
 .contact {
-  padding: var(--section-space) var(--content-gutter);
+  padding: clamp(4.5rem, 8vw, 7rem) var(--content-gutter);
   background: var(--color-surface);
+  scroll-margin-top: 6.25rem;
 }
+
+/* =========================
+   LAYOUT
+   ========================= */
 
 .contact-inner {
   display: grid;
   width: min(100%, var(--content-width));
-  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
   align-items: start;
-  gap: clamp(3rem, 10vw, 10rem);
+  gap: clamp(3rem, 8vw, 8rem);
   margin: 0 auto;
 }
 
-.eyebrow {
-  color: var(--color-accent);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-}
-
 .contact h2 {
-  max-width: 10ch;
-  margin: 1.25rem 0 1.5rem;
+  max-width: 16ch;
+  margin: 0 0 1.5rem;
   color: var(--color-text);
-  font-size: clamp(3.5rem, 7vw, 5rem);
+  font-size: clamp(2.3rem, 4.4vw, 3.4rem);
   font-weight: 600;
-  letter-spacing: -0.08em;
-  line-height: 0.95;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
 }
 
-.contact-copy>p {
-  max-width: 30rem;
+.contact-copy p {
+  max-width: 34rem;
   margin: 0;
   color: var(--color-muted);
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
   line-height: 1.75;
+}
+
+/* =========================
+   DIRECT CONTACT
+   ========================= */
+
+.contact-direct {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-top: clamp(0.5rem, 1.5vw, 1rem);
+  border-top: 1px solid var(--color-border);
 }
 
 .contact-details {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 0.4rem;
-  margin-top: 2.5rem;
-  color: var(--color-muted);
-  font-size: 0.9rem;
 }
 
-.contact-details a {
+.contact-email {
+  width: fit-content;
   color: var(--color-text);
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
   font-weight: 600;
+  letter-spacing: -0.02em;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-top: 0.5rem;
+.contact-email:hover {
+  color: var(--color-accent);
 }
 
-.contact-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.contact-form label span {
+.contact-location {
   color: var(--color-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-input,
-textarea {
-  width: 100%;
-  padding: 0.8rem 0;
-  border: 0;
-  border-bottom: 1px solid var(--color-border);
-  border-radius: 0;
-  outline: 0;
-  color: var(--color-text);
-  background: transparent;
-  resize: vertical;
-  transition: border-color 0.25s ease;
-}
-
-input:focus,
-textarea:focus {
-  border-color: var(--color-accent);
-}
-
-.submit-button {
-  align-self: flex-start;
-  padding: 1rem 1.4rem;
-  border: 0;
-  border-radius: var(--radius-pill);
+.contact-cta {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
   color: #fff;
   background: var(--color-accent);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  transition: transform 0.25s ease, background 0.25s ease;
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
 }
 
-.submit-button span {
-  display: inline-block;
-  margin-left: 0.5rem;
+.contact-cta:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.contact-cta span {
   transition: transform 0.25s ease;
 }
 
-.submit-button:hover {
-  background: var(--color-accent-hover);
-  transform: translateY(-3px);
+.contact-cta:hover span {
+  transform: translateX(3px);
 }
 
-.submit-button:hover span {
-  transform: translate(0.2rem, -0.2rem);
-}
+/* =========================
+   RESPONSIVE
+   ========================= */
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .contact-inner {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3rem);
   }
 
   .contact h2 {
-    max-width: 12ch;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact h2 {
+    font-size: clamp(2rem, 8.5vw, 2.7rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-email,
+  .contact-cta,
+  .contact-cta span {
+    transition: none;
+  }
+
+  .contact-cta:hover {
+    transform: none;
+  }
+
+  .contact-cta:hover span {
+    transform: none;
   }
 }
 </style>

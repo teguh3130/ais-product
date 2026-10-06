@@ -1,36 +1,43 @@
 <script setup>
 import { inject } from 'vue'
-import overviewImage from '../assets/gambar/1.png'
-import shipImage from '../assets/gambar/safety.png'
+import aboutVisual from '../assets/gambar/safety.png'
 
 const t = inject('t')
+
+const focusKeys = ['safety', 'research', 'collaboration']
 </script>
 
 <template>
   <section id="about" class="about">
-    <div class="about-intro" data-aos="fade-up">
-      <span class="eyebrow">ABOUT AIS ITS</span>
-      <h2>{{ t.about.subtitle }}</h2>
+    <!-- MAIN: copy left, large visual right -->
+    <div class="about-main">
+      <div class="about-copy" data-aos="fade-up">
+        <h2>{{ t.about.headline }}</h2>
+        <div class="about-description">
+          <p>{{ t.about.description[1] }}</p>
+          <p>{{ t.about.description[2] }}</p>
+        </div>
+      </div>
+
+      <figure class="about-visual" data-aos="fade-up" data-aos-delay="100">
+        <img :src="aboutVisual" :alt="t.about.visualAlt" loading="lazy" />
+      </figure>
     </div>
 
-    <div class="editorial-row" data-aos="fade-up">
-      <div class="editorial-media">
-        <img :src="overviewImage" alt="AIS ITS monitoring interface" loading="lazy" />
-      </div>
-      <div class="editorial-copy">
-        <span class="section-index">01 / INTELLIGENCE</span>
-        <p>{{ t.about.description[1] }}</p>
-      </div>
-    </div>
-
-    <div class="editorial-row editorial-row-reverse" data-aos="fade-up">
-      <div class="editorial-media">
-        <img :src="shipImage" alt="Vessel tracked by AIS ITS" loading="lazy" />
-      </div>
-      <div class="editorial-copy">
-        <span class="section-index">02 / SAFETY</span>
-        <p>{{ t.about.description[2] }}</p>
-        <a class="text-link" href="#workflow">Explore the system <span aria-hidden="true">↗</span></a>
+    <!-- OUR FOCUS -->
+    <div class="about-focus">
+      <div class="focus-grid">
+        <article
+          v-for="(key, index) in focusKeys"
+          :key="key"
+          class="focus-item"
+          data-aos="fade-up"
+          :data-aos-delay="index * 80"
+        >
+          <span class="focus-accent" aria-hidden="true"></span>
+          <h3>{{ t.about.focus.items[key].title }}</h3>
+          <p>{{ t.about.focus.items[key].description }}</p>
+        </article>
       </div>
     </div>
   </section>
@@ -38,123 +45,165 @@ const t = inject('t')
 
 <style scoped>
 .about {
-  padding: var(--section-space) var(--content-gutter);
-  background: var(--color-surface);
+  --about-width: 1360px;
+
+  padding: clamp(4.5rem, 6vw, 5.5rem) var(--content-gutter) var(--section-space);
+  background: var(--color-background);
+  scroll-margin-top: 6.25rem;
 }
 
-.about-intro,
-.editorial-row {
-  width: min(100%, var(--content-width));
+/* =========================
+   MAIN COMPOSITION
+   ========================= */
+
+.about-main {
+  display: grid;
+  width: min(100%, var(--about-width));
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
   margin: 0 auto;
 }
 
-.about-intro {
-  margin-bottom: clamp(4rem, 9vw, 9rem);
-}
-
-.eyebrow,
-.section-index {
-  color: var(--color-accent);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+.about-copy {
+  min-width: 0;
+  max-width: 37.5rem;
 }
 
 .about h2 {
-  max-width: 10ch;
-  margin: 1.25rem 0 0;
+  max-width: 37.5rem;
+  margin: 0 0 1.75rem;
   color: var(--color-text);
-  font-size: clamp(3rem, 6vw, 3.5rem);
-  font-weight: 600;
-  letter-spacing: -0.07em;
-  line-height: 1;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-wrap: balance;
 }
 
-.editorial-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
-  align-items: center;
-  gap: clamp(2rem, 8vw, 8rem);
+.about-description {
+  max-width: 35rem;
 }
 
-.editorial-row+.editorial-row {
-  margin-top: clamp(5rem, 13vw, 12rem);
-}
-
-.editorial-row-reverse {
-  grid-template-columns: minmax(18rem, 0.75fr) minmax(0, 1.25fr);
-}
-
-.editorial-row-reverse .editorial-media {
-  order: 2;
-}
-
-.editorial-row-reverse .editorial-copy {
-  order: 1;
-}
-
-.editorial-media {
-  overflow: hidden;
-  border-radius: var(--radius-image);
-  background: var(--color-background);
-}
-
-.editorial-media img {
-  width: 100%;
-  object-fit: cover;
-}
-
-.editorial-copy {
-  max-width: 28rem;
-}
-
-.editorial-copy p {
-  margin: 1.5rem 0 0;
+.about-description p {
+  margin: 0 0 1.1rem;
   color: var(--color-muted);
-  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-size: 1.125rem;
   line-height: 1.75;
 }
 
-.text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
+.about-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* The large visual is the section's anchor: edge-to-edge in its column. */
+.about-visual {
+  min-width: 0;
+  margin: 0;
+}
+
+.about-visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.05);
+}
+
+/* =========================
+   OUR FOCUS
+   ========================= */
+
+.about-focus {
+  width: min(100%, var(--about-width));
+  margin: clamp(4rem, 8vw, 7rem) auto 0;
+  /* Nudge the focus columns down from the divider (~32px) without moving it. */
+  padding-top: calc(clamp(2.5rem, 5vw, 4rem) + 2rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.focus-item {
+  min-width: 0;
+  padding: 0 clamp(1.25rem, 2.5vw, 2.5rem);
+  border-left: 1px solid var(--color-border);
+}
+
+.focus-item:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.focus-item:last-child {
+  padding-right: 0;
+}
+
+.focus-accent {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
+.focus-item h3 {
+  margin: 1.5rem 0 0.65rem;
   color: var(--color-text);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
-.text-link span {
-  color: var(--color-accent);
-  font-size: 1.2rem;
-  transition: transform 0.25s ease;
+.focus-item p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
-.text-link:hover span {
-  transform: translate(0.2rem, -0.2rem);
-}
+/* =========================
+   RESPONSIVE
+   ========================= */
 
 @media (max-width: 760px) {
-
-  .editorial-row,
-  .editorial-row-reverse {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .about-main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 3rem);
   }
 
-  .editorial-row-reverse .editorial-media,
-  .editorial-row-reverse .editorial-copy {
-    order: initial;
-  }
-
-  .editorial-copy {
+  .about-copy {
     max-width: 100%;
   }
 
-  .editorial-media img {
-    aspect-ratio: 1.2;
+  .about h2 {
+    max-width: 100%;
+  }
+
+  .about-focus {
+    margin-top: clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .focus-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .focus-item {
+    padding: 1.5rem 0;
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .focus-item:first-child {
+    padding-top: 0;
+    border-top: 0;
   }
 }
 </style>

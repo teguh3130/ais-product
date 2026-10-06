@@ -13,6 +13,6 @@ app.mount('#app')
 
 AOS.init({
   duration: 800,
-  once: true, // animasi hanya sekali
+  once: true,
   offset: 50,
 })

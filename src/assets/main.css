@@ -46,10 +46,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body.modal-open {
-  overflow: none;
-}
-
 button,
 input,
 textarea,
@@ -64,6 +60,13 @@ a {
 
 a {
   color: inherit;
+}
+
+/* Visible keyboard focus for every interactive element (R-32). The ring is the
+   single action accent, offset so it clears the control on light and dark. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 img,
@@ -89,7 +92,9 @@ button {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 .fade-enter-from {

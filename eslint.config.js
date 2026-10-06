@@ -26,5 +26,13 @@ export default defineConfig([
 
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 
+  {
+    name: 'app/rules',
+    rules: {
+      // Storage access is wrapped in try/catch and intentionally swallowed.
+      'no-empty': ['error', { allowEmptyCatch: true }],
+    },
+  },
+
   skipFormatting,
 ])
