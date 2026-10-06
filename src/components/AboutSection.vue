@@ -26,6 +26,7 @@ const focusKeys = ['safety', 'research', 'collaboration']
 
     <!-- OUR FOCUS -->
     <div class="about-focus">
+      <h3 class="focus-heading">{{ t.about.focus.headline }}</h3>
       <div class="focus-grid">
         <article
           v-for="(key, index) in focusKeys"
@@ -34,8 +35,7 @@ const focusKeys = ['safety', 'research', 'collaboration']
           data-aos="fade-up"
           :data-aos-delay="index * 80"
         >
-          <span class="focus-accent" aria-hidden="true"></span>
-          <h3>{{ t.about.focus.items[key].title }}</h3>
+          <h4>{{ t.about.focus.items[key].title }}</h4>
           <p>{{ t.about.focus.items[key].description }}</p>
         </article>
       </div>
@@ -125,6 +125,16 @@ const focusKeys = ['safety', 'research', 'collaboration']
   border-top: 1px solid var(--color-border);
 }
 
+.focus-heading {
+  max-width: 34ch;
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  color: var(--color-text);
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
 .focus-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -145,16 +155,8 @@ const focusKeys = ['safety', 'research', 'collaboration']
   padding-right: 0;
 }
 
-.focus-accent {
-  display: block;
-  width: 2.5rem;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--color-accent);
-}
-
-.focus-item h3 {
-  margin: 1.5rem 0 0.65rem;
+.focus-item h4 {
+  margin: 0 0 0.6rem;
   color: var(--color-text);
   font-size: 1.55rem;
   font-weight: 700;

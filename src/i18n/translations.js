@@ -41,18 +41,22 @@ export const translations = {
       visualAlt: 'Operasi maritim AIS ITS',
       focus: {
         label: 'FOKUS KAMI',
+        headline:
+          'Dibangun untuk perairan yang lebih aman, riset yang lebih baik, dan kolaborasi yang lebih kuat.',
         items: {
           safety: {
             title: 'Keselamatan Maritim',
-            description: 'Mendukung pemantauan kapal dan kewaspadaan dini terhadap risiko.',
+            description:
+              'Pantau pergerakan kapal, identifikasi risiko, dan dukung peringatan dini untuk operasi maritim yang lebih aman.',
           },
           research: {
             title: 'Riset & Inovasi',
-            description: 'Memungkinkan analisis berbasis AIS dan riset maritim.',
+            description:
+              'Ubah data AIS menjadi wawasan bermakna untuk analisis, riset, dan inovasi maritim.',
           },
           collaboration: {
             title: 'Kolaborasi',
-            description: 'Membuka peluang riset dan kolaborasi.',
+            description: 'Dukung riset, pendidikan, dan kolaborasi di seluruh sektor maritim.',
           },
         },
       },
@@ -239,18 +243,22 @@ export const translations = {
       visualAlt: 'AIS ITS maritime operations',
       focus: {
         label: 'OUR FOCUS',
+        headline: 'Built for safer waters, better research, and stronger collaboration.',
         items: {
           safety: {
             title: 'Maritime Safety',
-            description: 'Supporting vessel monitoring and early risk awareness.',
+            description:
+              'Monitor vessel movements, identify risks, and support early warning for safer maritime operations.',
           },
           research: {
             title: 'Research & Innovation',
-            description: 'Enabling AIS-based analysis and maritime research.',
+            description:
+              'Turn AIS data into meaningful insights for maritime analysis, research, and innovation.',
           },
           collaboration: {
             title: 'Collaboration',
-            description: 'Creating opportunities for research and collaboration.',
+            description:
+              'Support research, education, and collaboration across the maritime sector.',
           },
         },
       },
